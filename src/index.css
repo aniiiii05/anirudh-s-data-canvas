@@ -4,42 +4,42 @@
 
 @layer base {
   :root {
-    --background: 232 60% 10%;
-    --foreground: 220 20% 90%;
+    --background: 232 60% 7%;
+    --foreground: 220 30% 92%;
 
-    --card: 232 40% 14%;
-    --card-foreground: 220 20% 90%;
+    --card: 232 45% 12%;
+    --card-foreground: 220 30% 92%;
 
-    --popover: 232 40% 14%;
-    --popover-foreground: 220 20% 90%;
+    --popover: 232 45% 12%;
+    --popover-foreground: 220 30% 92%;
 
-    --primary: 234 80% 66%;
+    --primary: 250 90% 70%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 270 50% 55%;
+    --secondary: 320 80% 65%;
     --secondary-foreground: 0 0% 100%;
 
-    --muted: 232 30% 18%;
-    --muted-foreground: 220 15% 55%;
+    --muted: 232 30% 16%;
+    --muted-foreground: 220 20% 60%;
 
-    --accent: 190 80% 55%;
-    --accent-foreground: 232 60% 10%;
+    --accent: 170 85% 50%;
+    --accent-foreground: 232 60% 7%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 232 30% 22%;
-    --input: 232 30% 22%;
-    --ring: 234 80% 66%;
+    --border: 250 30% 25%;
+    --input: 250 30% 25%;
+    --ring: 250 90% 70%;
 
     --radius: 0.75rem;
 
-    --gradient-start: 234 80% 66%;
-    --gradient-mid: 270 50% 55%;
-    --gradient-end: 320 80% 77%;
+    --gradient-start: 250 90% 70%;
+    --gradient-mid: 320 80% 65%;
+    --gradient-end: 170 85% 50%;
 
-    --glass-bg: 232 40% 14%;
-    --glass-border: 232 30% 28%;
+    --glass-bg: 232 45% 12%;
+    --glass-border: 250 40% 30%;
   }
 }
 
@@ -62,40 +62,37 @@
 @layer components {
   .glass-card {
     @apply rounded-xl border;
-    background: hsla(var(--glass-bg) / 0.6);
-    border-color: hsla(var(--glass-border) / 0.3);
-    backdrop-filter: blur(16px);
+    background: hsla(var(--glass-bg) / 0.5);
+    border-color: hsla(var(--glass-border) / 0.4);
+    backdrop-filter: blur(20px);
+    box-shadow: 0 8px 32px hsla(250 90% 70% / 0.06), inset 0 1px 0 hsla(0 0% 100% / 0.05);
+  }
+  .glass-card:hover {
+    border-color: hsla(var(--gradient-start) / 0.4);
+    box-shadow: 0 8px 40px hsla(250 90% 70% / 0.12), inset 0 1px 0 hsla(0 0% 100% / 0.08);
   }
   .gradient-text {
     @apply bg-clip-text text-transparent;
     background-image: linear-gradient(135deg, hsl(var(--gradient-start)), hsl(var(--gradient-mid)), hsl(var(--gradient-end)));
   }
-  .gradient-border {
-    position: relative;
-  }
-  .gradient-border::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    border-radius: inherit;
-    padding: 1px;
+  .gradient-bg {
     background: linear-gradient(135deg, hsl(var(--gradient-start)), hsl(var(--gradient-mid)), hsl(var(--gradient-end)));
-    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    -webkit-mask-composite: xor;
-    mask-composite: exclude;
-    pointer-events: none;
   }
   .glow-button {
     @apply relative overflow-hidden;
-    box-shadow: 0 0 20px hsla(var(--gradient-start) / 0.3);
-    transition: box-shadow 0.3s ease;
+    background: linear-gradient(135deg, hsl(var(--gradient-start)), hsl(var(--gradient-mid)));
+    box-shadow: 0 0 24px hsla(250 90% 70% / 0.4), 0 0 48px hsla(320 80% 65% / 0.15);
+    transition: box-shadow 0.3s ease, transform 0.2s ease;
   }
   .glow-button:hover {
-    box-shadow: 0 0 40px hsla(var(--gradient-start) / 0.5), 0 0 80px hsla(var(--gradient-mid) / 0.2);
+    box-shadow: 0 0 40px hsla(250 90% 70% / 0.6), 0 0 80px hsla(320 80% 65% / 0.3), 0 0 120px hsla(170 85% 50% / 0.1);
+    transform: translateY(-1px);
   }
   .section-container {
     @apply max-w-6xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+  .glow-ring {
+    box-shadow: 0 0 0 1px hsla(250 90% 70% / 0.3), 0 0 15px hsla(250 90% 70% / 0.1);
   }
 }
 
