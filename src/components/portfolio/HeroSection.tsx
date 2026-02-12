@@ -205,32 +205,12 @@ const HeroSection = () => {
         </div>
       </motion.div>
 
-      {/* Pixel character - walking pose */}
+      {/* Character pose - left side */}
       <motion.div 
-        className="absolute bottom-20 right-[12%] sm:right-[16%] z-[7] hidden md:block"
-        initial={{ x: 50, opacity: 0 }}
-        animate={{ x: 0, opacity: 1 }}
-        transition={{ delay: 1.8, duration: 0.8 }}
-      >
-        <motion.img 
-          src={anirudhCharPointing} 
-          alt="Anirudh pixel character" 
-          className="w-36 sm:w-44 lg:w-52 pointer-events-none"
-          style={{ 
-            imageRendering: "pixelated",
-            filter: "drop-shadow(6px 6px 0 hsla(25, 60%, 15%, 0.6))",
-          }} 
-          animate={{ y: [0, -12, 0] }} 
-          transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }} 
-        />
-      </motion.div>
-
-      {/* Second character pose - left side accent */}
-      <motion.div 
-        className="absolute bottom-24 left-[6%] sm:left-[10%] z-[7] hidden xl:block"
+        className="absolute bottom-24 left-[6%] sm:left-[10%] z-[7] hidden lg:block"
         initial={{ x: -50, opacity: 0 }}
         animate={{ x: 0, opacity: 1 }}
-        transition={{ delay: 2.2, duration: 0.8 }}
+        transition={{ delay: 1.8, duration: 0.8 }}
       >
         <motion.img 
           src={anirudhCharThinking} 
@@ -239,6 +219,7 @@ const HeroSection = () => {
           style={{ 
             imageRendering: "pixelated",
             filter: "drop-shadow(6px 6px 0 hsla(25, 60%, 15%, 0.6))",
+            background: "transparent",
           }} 
           animate={{ y: [0, -8, 0] }} 
           transition={{ duration: 2, delay: 0.5, repeat: Infinity, ease: "easeInOut" }} 
