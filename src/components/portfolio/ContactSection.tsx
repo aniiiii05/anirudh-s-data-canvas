@@ -19,7 +19,9 @@ const ContactSection = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    toast({ title: "🍄 Message sent!", description: "Thank you! I'll get back to you soon." });
+    const mailto = `mailto:sharma.aniiirudh@gmail.com?subject=${encodeURIComponent(form.subject)}&body=${encodeURIComponent(`Hi Anirudh,\n\nFrom: ${form.name} (${form.email})\n\n${form.message}`)}`;
+    window.open(mailto, "_blank");
+    toast({ title: "🍄 Opening email client!", description: "Your default email app should open now." });
     setForm({ name: "", email: "", subject: "", message: "" });
   };
 
