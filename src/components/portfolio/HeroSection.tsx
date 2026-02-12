@@ -116,7 +116,7 @@ const Pipe3D = ({ side, bottom, height = 60 }: { side: "left" | "right"; bottom:
         {hovered && (
           <motion.div
             className="absolute flex flex-col items-center"
-            style={{ bottom: height + 18, left: 20, transform: "translateX(-50%)" }}
+            style={{ bottom: height + 18, left: "50%", transform: "translateX(-50%)" }}
             initial={{ y: 40, opacity: 0, scaleY: 0 }}
             animate={{ y: 0, opacity: 1, scaleY: 1 }}
             exit={{ y: 40, opacity: 0, scaleY: 0 }}
@@ -462,15 +462,7 @@ const HeroSection = () => {
       <Pipe3D side="left" bottom="64px" height={70} />
       <Pipe3D side="right" bottom="64px" height={50} />
 
-      {/* Photo frame as "Player 1" card */}
-      <motion.div className="absolute bottom-28 left-[3%] sm:left-[5%] z-[8] hidden lg:block xl:hidden" initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 1.5, duration: 0.6 }}>
-        <div style={{ border: "6px solid hsl(45 100% 50%)", boxShadow: "inset -4px -4px 0 hsla(25 70% 30% / 0.5), inset 4px 4px 0 hsla(45 100% 70% / 0.5), 6px 6px 0 hsl(25 60% 20%)", width: 110, height: 110, overflow: "hidden", background: "hsl(25 55% 35%)" }}>
-          <img src={anirudhPhoto} alt="Anirudh Sharma" className="w-full h-full object-cover" />
-        </div>
-        <div className="text-center mt-2">
-          <span className="text-xs font-bold text-accent drop-shadow-[1px_1px_0_hsl(25,60%,20%)]" style={{ fontFamily: "'VT323', monospace", fontSize: "1rem" }}>Player 1</span>
-        </div>
-      </motion.div>
+      {/* Character pose - left side (no photo frame) */}
 
       {/* Character pose - left side */}
       <motion.div 
@@ -479,14 +471,16 @@ const HeroSection = () => {
         animate={{ x: 0, opacity: 1 }}
         transition={{ delay: 1.8, duration: 0.8 }}
       >
-        <motion.img 
-          src={anirudhCharThinking} 
-          alt="Anirudh pixel character pose" 
-          className="w-32 lg:w-40 pointer-events-none"
+        <motion.div
+          className="w-32 lg:w-40 h-40 lg:h-48 pointer-events-none"
           style={{ 
+            backgroundImage: `url(${anirudhCharThinking})`,
+            backgroundSize: "contain",
+            backgroundRepeat: "no-repeat",
+            backgroundPosition: "center bottom",
             imageRendering: "pixelated",
             filter: "drop-shadow(6px 6px 0 hsla(25, 60%, 15%, 0.6))",
-            background: "transparent",
+            mixBlendMode: "multiply",
           }} 
           animate={{ y: [0, -8, 0] }} 
           transition={{ duration: 2, delay: 0.5, repeat: Infinity, ease: "easeInOut" }} 
