@@ -42,8 +42,8 @@ const AboutSection = () => {
             <motion.img
               src={anirudhCharacter}
               alt="Anirudh pixel character"
-              className="w-40 sm:w-52 drop-shadow-[4px_4px_0_hsl(25,60%,20%)]"
-              style={{ imageRendering: "pixelated" }}
+              className="w-40 sm:w-52"
+              style={{ imageRendering: "pixelated", mixBlendMode: "multiply", filter: "drop-shadow(3px 3px 0 hsl(25 60% 20%))" }}
               animate={{ y: [0, -8, 0] }}
               transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
             />

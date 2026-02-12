@@ -132,10 +132,10 @@ const HeroSection = () => {
       <motion.img
         src={anirudhCharacter}
         alt="Anirudh pixel character"
-        className="absolute bottom-16 right-[15%] w-28 sm:w-36 lg:w-44 pointer-events-none z-10 drop-shadow-[4px_4px_0_hsl(25,60%,20%)]"
-        style={{ imageRendering: "pixelated" }}
-        animate={{ y: [0, -16, 0] }}
-        transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+        className="absolute bottom-20 right-[12%] w-32 sm:w-40 lg:w-48 pointer-events-none z-10"
+        style={{ imageRendering: "pixelated", mixBlendMode: "multiply", filter: "drop-shadow(3px 3px 0 hsl(25 60% 20%))" }}
+        animate={{ y: [0, -20, 0] }}
+        transition={{ duration: 1.2, repeat: Infinity, ease: "easeInOut" }}
       />
 
       {/* Coins */}
