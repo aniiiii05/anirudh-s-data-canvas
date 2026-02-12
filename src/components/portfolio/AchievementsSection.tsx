@@ -3,30 +3,36 @@ import { useRef } from "react";
 
 const achievements = [
   {
-    emoji: "🏆",
-    title: "Hackathons",
+    emoji: "🎓",
+    title: "Certifications",
     items: [
-      "Smart India Hackathon participant",
-      "University-level coding competitions",
-      "AI/ML challenge finalist",
+      "Google Data Analytics Professional Certificate",
+      "Google Data Analytics Certification (Jan 2026)",
+      "Microsoft Azure Fundamentals Badge (Jan 2026)",
+      "Master Microsoft Excel (Sep 2025)",
+      "CAPM (PMI) — In Progress",
     ],
   },
   {
     emoji: "📈",
     title: "Measurable Impact",
     items: [
-      "20%+ improvement in OTIF delivery scores",
-      "2M+ records processed and analyzed",
-      "15+ hours/week saved through automation",
+      "35% reduction in parsing errors at PDF4me",
+      "Pipeline uptime improved from 92% to 98.5%",
+      "2M+ daily records processed across 5+ pipelines",
+      "25 hours/week saved in manual reporting at Tata Motors",
+      "30% improvement in reporting accuracy via ETL automation",
     ],
   },
   {
-    emoji: "🎓",
-    title: "Certifications",
+    emoji: "🏆",
+    title: "Key Milestones",
     items: [
-      "Data Analytics Professional",
-      "Python for Data Science",
-      "Business Intelligence Fundamentals",
+      "12+ features delivered across 3 sprints",
+      "50+ code reviews, 200+ Git commits",
+      "10+ executive-level presentations delivered",
+      "1,000+ students engaged in Cisco campaigns",
+      "8 SOPs authored for analytical tools",
     ],
   },
 ];

@@ -1,14 +1,13 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-import { BarChart3, Code, Database, BrainCircuit, LineChart, Users } from "lucide-react";
 
 const competencies = [
-  { icon: BarChart3, title: "Data Analysis & Visualization", desc: "Transforming complex datasets into compelling visual narratives using Power BI, Tableau, and Python.", emoji: "📊" },
-  { icon: Code, title: "Python & SQL Development", desc: "Building robust data pipelines, automation scripts, and analytical tools with clean, efficient code.", emoji: "🐍" },
-  { icon: Database, title: "ETL & Data Engineering", desc: "Designing medallion architecture pipelines processing millions of records with high reliability.", emoji: "🏗️" },
-  { icon: LineChart, title: "Business Intelligence", desc: "Delivering actionable dashboards and KPI frameworks that drive 20%+ process improvements.", emoji: "📈" },
-  { icon: BrainCircuit, title: "AI & Generative AI", desc: "Leveraging LLMs, NLP, and prompt engineering to build intelligent applications.", emoji: "🧠" },
-  { icon: Users, title: "Project Management", desc: "Leading cross-functional teams with Agile methodology and clear communication.", emoji: "👥" },
+  { title: "Data Analysis & Visualization", desc: "Power BI dashboards, Tableau analytics, and Python visualizations driving 15%+ report adoption.", emoji: "📊" },
+  { title: "Python & SQL Development", desc: "Data parsing algorithms boosting processing speed by 20%, reducing memory usage by 15% across 5+ pipelines.", emoji: "🐍" },
+  { title: "ETL & Data Engineering", desc: "Automated ETL workflows consolidating 5+ data sources, improving accuracy by 30% and eliminating 40+ hours of manual processing.", emoji: "🏗️" },
+  { title: "Business Intelligence", desc: "Executive-level presentations translating complex data into actionable recommendations across 3 departments.", emoji: "📈" },
+  { title: "NLP & AI Tools", desc: "LLM-based summarization, text-to-speech synthesis, and AI research assistants processing 1000+ academic papers.", emoji: "🧠" },
+  { title: "Agile Project Management", desc: "Delivering 12+ features across 3 sprints, 50+ code reviews, and 200+ Git commits with 99% standards adherence.", emoji: "👥" },
 ];
 
 const CompetenciesSection = () => {

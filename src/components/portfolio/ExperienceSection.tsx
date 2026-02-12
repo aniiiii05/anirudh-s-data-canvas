@@ -1,55 +1,45 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-import { Briefcase } from "lucide-react";
 
 const experiences = [
   {
     company: "PDF4me (Remote — Zürich, Switzerland)",
-    role: "Data Specialist",
-    period: "Oct 2024 – Present",
+    role: "Data Specialist & Design Intern",
+    period: "Oct 2025 – Present",
     achievements: [
-      "Analyzing and optimizing document processing pipelines using Python & SQL",
-      "Building Power BI dashboards for KPI tracking and business insights",
-      "Implementing data quality frameworks and automated reporting",
+      "Engineered data parsing algorithms in Python/SQL, boosting processing speed by 20% and reducing memory usage by 15% across 5+ production pipelines handling 2M+ daily records",
+      "Implemented automated validation protocols, cutting parsing errors by 35% and increasing pipeline uptime from 92% to 98.5%",
+      "Translated business requirements into technical specs, delivering 12+ features across 3 sprints with cross-functional teams of 8+ members",
+      "Authored technical documentation for 15K+ lines of code and 8 REST APIs, reducing onboarding time by 40%",
+      "Conducted 50+ code reviews and managed 200+ Git commits, maintaining 99% adherence to coding standards",
     ],
     emoji: "⭐",
     flag: "🇨🇭",
   },
   {
     company: "Tata Motors (India)",
-    role: "Data Analyst Intern",
-    period: "2023",
+    role: "Data Analyst Intern (Supply Chain)",
+    period: "May 2025 – Jul 2025",
     achievements: [
-      "Developed OTIF supply chain dashboard improving delivery tracking by 20%",
-      "Processed 2M+ records using Python and SQL for logistics optimization",
-      "Automated weekly reporting workflows saving 15+ hours/week",
+      "Developed iterative Power BI dashboards with stakeholder feedback loops, increasing report adoption by 15% and reducing manual reporting time by 25 hours/week across 3 departments",
+      "Automated ETL workflows using Python to consolidate data from 5+ sources, improving reporting accuracy by 30% and eliminating 40+ hours of monthly manual processing",
+      "Conducted root cause analysis on 50K+ logistics records, improving OTIF metrics by 2% within 2 months",
+      "Delivered 10+ executive-level presentations translating complex data insights into actionable recommendations",
     ],
     emoji: "🏎️",
     flag: "🇮🇳",
   },
   {
-    company: "Cisco (Virtual)",
-    role: "Data Analytics Job Simulation",
-    period: "2023",
+    company: "Cisco (Campus Ambassador)",
+    role: "Strategic Partner",
+    period: "Oct 2024 – Jun 2025",
     achievements: [
-      "Completed advanced data analytics simulation program",
-      "Applied statistical analysis and visualization techniques",
-      "Presented actionable insights to stakeholder panels",
+      "Executed campus brand awareness campaign engaging 1,000+ students and converting 100+ prospects",
+      "Coordinated 2 technical information sessions end-to-end managing logistics, speakers, and attendee engagement",
+      "Tracked campaign KPIs including attendance, engagement metrics, and conversion data to refine outreach strategies",
     ],
     emoji: "🌐",
     flag: "🌍",
-  },
-  {
-    company: "Durga Engineering Works",
-    role: "Business Operations Analyst",
-    period: "2020 – 2021",
-    achievements: [
-      "Streamlined inventory management using Excel-based analytics",
-      "Improved operational efficiency through data-driven process optimization",
-      "Generated weekly business intelligence reports for decision-making",
-    ],
-    emoji: "🔧",
-    flag: "🇮🇳",
   },
 ];
 
@@ -70,7 +60,6 @@ const ExperienceSection = () => {
         </motion.div>
 
         <div className="relative">
-          {/* Pipe-style timeline */}
           <div className="absolute left-6 md:left-1/2 top-0 bottom-0 w-6 md:-translate-x-3 pipe-style" />
 
           <div className="space-y-12">
@@ -82,7 +71,6 @@ const ExperienceSection = () => {
                 transition={{ duration: 0.5, delay: i * 0.15 }}
                 className={`relative flex flex-col md:flex-row items-start gap-6 ${i % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"}`}
               >
-                {/* Coin marker */}
                 <div className="absolute left-4 md:left-1/2 w-8 h-8 -translate-x-1 md:-translate-x-4 mt-6 z-10 rounded-full bg-accent border-4 border-[hsl(35,80%,40%)] flex items-center justify-center text-sm">
                   {exp.emoji}
                 </div>

@@ -3,13 +3,12 @@ import { useRef } from "react";
 
 const skillCategories = [
   {
-    title: "Programming & Data",
+    title: "Programming",
     emoji: "🐍",
     barColor: "hsl(0 80% 50%)",
     skills: [
-      { name: "Python", level: 90 },
+      { name: "Python (pandas, NumPy, scikit-learn)", level: 90 },
       { name: "SQL", level: 92 },
-      { name: "Spark", level: 65 },
     ],
   },
   {
@@ -19,7 +18,7 @@ const skillCategories = [
     skills: [
       { name: "Power BI", level: 88 },
       { name: "Tableau", level: 82 },
-      { name: "Excel", level: 90 },
+      { name: "Advanced Excel (VBA, Pivot Tables)", level: 90 },
     ],
   },
   {
@@ -27,19 +26,19 @@ const skillCategories = [
     emoji: "🏗️",
     barColor: "hsl(45 100% 50%)",
     skills: [
-      { name: "ETL Pipelines", level: 85 },
-      { name: "Time Series", level: 75 },
-      { name: "Data Modeling", level: 80 },
+      { name: "ETL & Data Pipelines", level: 85 },
+      { name: "Time Series Forecasting (ARIMA)", level: 75 },
+      { name: "Data Modeling & Validation", level: 80 },
     ],
   },
   {
-    title: "AI & ML",
+    title: "AI & NLP",
     emoji: "🧠",
     barColor: "hsl(0 80% 50%)",
     skills: [
+      { name: "NLP Fundamentals", level: 75 },
       { name: "LLMs (OpenAI, HuggingFace)", level: 78 },
-      { name: "NLP & Prompt Engineering", level: 80 },
-      { name: "Generative AI", level: 75 },
+      { name: "Dashboarding", level: 88 },
     ],
   },
   {
@@ -47,9 +46,9 @@ const skillCategories = [
     emoji: "🔧",
     barColor: "hsl(120 65% 38%)",
     skills: [
-      { name: "Git & Version Control", level: 85 },
+      { name: "Git / GitHub", level: 85 },
       { name: "Agile / Scrum", level: 80 },
-      { name: "Stakeholder Mgmt", level: 88 },
+      { name: "Stakeholder Management", level: 88 },
     ],
   },
 ];
