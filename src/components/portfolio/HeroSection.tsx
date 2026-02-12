@@ -1,7 +1,7 @@
 import { useEffect, useState, useRef } from "react";
 import { motion } from "framer-motion";
-import anirudhPoses1 from "@/assets/anirudh-poses-1.png";
-import anirudhPoses2 from "@/assets/anirudh-poses-2.png";
+import anirudhCharThinking from "@/assets/anirudh-char-thinking.png";
+import anirudhCharPointing from "@/assets/anirudh-char-pointing.png";
 import anirudhPhoto from "@/assets/anirudh-photo-1.png";
 import { Github, Linkedin, Mail, Download, ChevronDown } from "lucide-react";
 
@@ -213,7 +213,7 @@ const HeroSection = () => {
         transition={{ delay: 1.8, duration: 0.8 }}
       >
         <motion.img 
-          src={anirudhPoses2} 
+          src={anirudhCharPointing} 
           alt="Anirudh pixel character" 
           className="w-36 sm:w-44 lg:w-52 pointer-events-none"
           style={{ 
@@ -233,7 +233,7 @@ const HeroSection = () => {
         transition={{ delay: 2.2, duration: 0.8 }}
       >
         <motion.img 
-          src={anirudhPoses1} 
+          src={anirudhCharThinking} 
           alt="Anirudh pixel character pose" 
           className="w-32 lg:w-40 pointer-events-none"
           style={{ 
