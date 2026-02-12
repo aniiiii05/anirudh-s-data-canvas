@@ -115,8 +115,8 @@ const Pipe3D = ({ side, bottom, height = 60 }: { side: "left" | "right"; bottom:
       <AnimatePresence>
         {hovered && (
           <motion.div
-            className="absolute left-1/2 -translate-x-1/2 flex flex-col items-center"
-            style={{ bottom: height + 18 }}
+            className="absolute flex flex-col items-center"
+            style={{ bottom: height + 18, left: 20, transform: "translateX(-50%)" }}
             initial={{ y: 40, opacity: 0, scaleY: 0 }}
             animate={{ y: 0, opacity: 1, scaleY: 1 }}
             exit={{ y: 40, opacity: 0, scaleY: 0 }}
