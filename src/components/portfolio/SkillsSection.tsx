@@ -4,7 +4,8 @@ import { useRef } from "react";
 const skillCategories = [
   {
     title: "Programming & Data",
-    color: "hsl(250 90% 70%)",
+    emoji: "🐍",
+    barColor: "hsl(0 80% 50%)",
     skills: [
       { name: "Python", level: 90 },
       { name: "SQL", level: 92 },
@@ -13,7 +14,8 @@ const skillCategories = [
   },
   {
     title: "Analytics & BI",
-    color: "hsl(320 80% 65%)",
+    emoji: "📊",
+    barColor: "hsl(120 65% 38%)",
     skills: [
       { name: "Power BI", level: 88 },
       { name: "Tableau", level: 82 },
@@ -22,7 +24,8 @@ const skillCategories = [
   },
   {
     title: "Data Engineering",
-    color: "hsl(170 85% 50%)",
+    emoji: "🏗️",
+    barColor: "hsl(45 100% 50%)",
     skills: [
       { name: "ETL Pipelines", level: 85 },
       { name: "Time Series", level: 75 },
@@ -31,7 +34,8 @@ const skillCategories = [
   },
   {
     title: "AI & ML",
-    color: "hsl(250 90% 70%)",
+    emoji: "🧠",
+    barColor: "hsl(0 80% 50%)",
     skills: [
       { name: "LLMs (OpenAI, HuggingFace)", level: 78 },
       { name: "NLP & Prompt Engineering", level: 80 },
@@ -40,7 +44,8 @@ const skillCategories = [
   },
   {
     title: "Tools & Practices",
-    color: "hsl(40 90% 55%)",
+    emoji: "🔧",
+    barColor: "hsl(120 65% 38%)",
     skills: [
       { name: "Git & Version Control", level: 85 },
       { name: "Agile / Scrum", level: 80 },
@@ -54,16 +59,14 @@ const SkillsSection = () => {
   const inView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section id="skills" className="py-24 relative">
-      <div className="absolute top-1/2 right-0 w-[400px] h-[400px] rounded-full blur-[200px] opacity-8 pointer-events-none" style={{ background: "hsl(170 85% 50%)" }} />
-
+    <section id="skills" className="py-24 relative" style={{ background: "linear-gradient(180deg, hsl(210 75% 58%), hsl(210 70% 52%))" }}>
       <div className="section-container relative z-10">
         <motion.div ref={ref} initial={{ opacity: 0, y: 40 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6 }}>
-          <h2 className="font-heading text-3xl sm:text-4xl font-bold mb-4 text-center">
-            Technical <span className="gradient-text">Skills</span>
+          <h2 className="font-heading text-lg sm:text-xl font-bold mb-4 text-center text-foreground drop-shadow-[2px_2px_0_hsl(25,60%,20%)]">
+            Technical <span className="text-accent">Skills</span>
           </h2>
-          <p className="text-muted-foreground text-center mb-16 max-w-2xl mx-auto">
-            A comprehensive toolkit for data analysis, AI development, and business intelligence
+          <p className="text-muted-foreground text-center mb-16 max-w-2xl mx-auto text-lg" style={{ fontFamily: "'VT323', monospace" }}>
+            Power-up levels unlocked! 🍄
           </p>
         </motion.div>
 
@@ -74,24 +77,24 @@ const SkillsSection = () => {
               initial={{ opacity: 0, y: 30 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: ci * 0.1 }}
-              className="glass-card p-6 rounded-xl"
+              className="glass-card p-6"
             >
-              <h3 className="font-heading font-semibold mb-4" style={{ color: cat.color }}>
-                {cat.title}
+              <h3 className="font-heading text-[10px] font-semibold mb-4 text-accent drop-shadow-[1px_1px_0_hsl(25,60%,20%)]">
+                {cat.emoji} {cat.title}
               </h3>
               <div className="space-y-4">
                 {cat.skills.map((skill, si) => (
                   <div key={skill.name}>
                     <div className="flex justify-between text-sm mb-1">
-                      <span className="text-foreground">{skill.name}</span>
-                      <span className="font-mono text-muted-foreground">{skill.level}%</span>
+                      <span className="text-foreground" style={{ fontFamily: "'VT323', monospace", fontSize: "1.1rem" }}>{skill.name}</span>
+                      <span className="font-bold text-accent" style={{ fontFamily: "'VT323', monospace", fontSize: "1.1rem" }}>{skill.level}%</span>
                     </div>
-                    <div className="h-2.5 rounded-full bg-muted overflow-hidden">
+                    <div className="h-4 bg-muted border-2 border-mario-brick overflow-hidden">
                       <motion.div
-                        className="h-full rounded-full"
+                        className="h-full"
                         style={{
-                          background: `linear-gradient(90deg, ${cat.color}, hsl(320 80% 65%))`,
-                          boxShadow: `0 0 8px ${cat.color}40`,
+                          background: cat.barColor,
+                          boxShadow: `inset 0 -2px 0 hsla(0 0% 0% / 0.2), inset 0 2px 0 hsla(0 0% 100% / 0.2)`,
                         }}
                         initial={{ width: 0 }}
                         animate={inView ? { width: `${skill.level}%` } : {}}

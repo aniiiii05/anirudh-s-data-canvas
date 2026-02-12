@@ -37,27 +37,49 @@ const formatNumber = (n: number) => {
   return n.toString();
 };
 
-const Particle = ({ i }: { i: number }) => {
-  const size = Math.random() * 4 + 1;
-  const x = Math.random() * 100;
-  const duration = Math.random() * 20 + 10;
-  const delay = Math.random() * 10;
-  const colors = [
-    "bg-primary/30",
-    "bg-secondary/30",
-    "bg-accent/30",
-  ];
-  const color = colors[i % colors.length];
-  return (
-    <motion.div
-      className={`absolute rounded-full ${color}`}
-      style={{ width: size, height: size, left: `${x}%` }}
-      initial={{ y: "100vh", opacity: 0 }}
-      animate={{ y: "-10vh", opacity: [0, 1, 0] }}
-      transition={{ duration, delay, repeat: Infinity, ease: "linear" }}
-    />
-  );
-};
+// Mario Cloud component
+const Cloud = ({ top, left, delay, size = 1 }: { top: string; left: string; delay: number; size?: number }) => (
+  <motion.div
+    className="absolute pointer-events-none"
+    style={{ top, left, transform: `scale(${size})` }}
+    animate={{ x: [0, 30, 0] }}
+    transition={{ duration: 8, delay, repeat: Infinity, ease: "easeInOut" }}
+  >
+    <div className="relative">
+      <div className="flex gap-0">
+        <div className="w-8 h-8 rounded-full bg-white" />
+        <div className="w-12 h-12 rounded-full bg-white -mt-4 -ml-2" />
+        <div className="w-10 h-10 rounded-full bg-white -mt-2 -ml-3" />
+        <div className="w-6 h-6 rounded-full bg-white -ml-1" />
+      </div>
+      {/* Cloud eyes */}
+      <div className="absolute top-3 left-6 flex gap-4">
+        <div className="w-1.5 h-2 bg-[hsl(25,60%,20%)] rounded-sm" />
+        <div className="w-1.5 h-2 bg-[hsl(25,60%,20%)] rounded-sm" />
+      </div>
+    </div>
+  </motion.div>
+);
+
+// Green pipe decoration
+const Pipe = ({ side, bottom }: { side: "left" | "right"; bottom: string }) => (
+  <div className={`absolute ${side}-4 sm:${side}-12`} style={{ bottom }}>
+    <div className="pipe-style rounded-t-sm" style={{ width: 48, height: 24, marginLeft: -4, marginBottom: -2 }} />
+    <div className="pipe-style" style={{ width: 40, height: 60 }} />
+  </div>
+);
+
+// Coin
+const Coin = ({ top, left, delay }: { top: string; left: string; delay: number }) => (
+  <motion.div
+    className="absolute w-6 h-6 rounded-full bg-accent border-2 border-[hsl(35,80%,40%)] flex items-center justify-center pointer-events-none"
+    style={{ top, left }}
+    animate={{ rotateY: [0, 180, 360], y: [0, -5, 0] }}
+    transition={{ duration: 2, delay, repeat: Infinity }}
+  >
+    <span className="text-[8px] font-bold text-[hsl(25,60%,20%)]">$</span>
+  </motion.div>
+);
 
 const HeroSection = () => {
   const [roleIndex, setRoleIndex] = useState(0);
@@ -96,19 +118,35 @@ const HeroSection = () => {
   }, [displayed, deleting, roleIndex]);
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-16">
-      {/* Particles */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {Array.from({ length: 40 }).map((_, i) => (
-          <Particle key={i} i={i} />
-        ))}
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-16"
+      style={{ background: "linear-gradient(180deg, hsl(210 80% 65%) 0%, hsl(210 75% 58%) 60%, hsl(210 70% 50%) 100%)" }}>
+      
+      {/* Clouds */}
+      <Cloud top="10%" left="5%" delay={0} size={0.8} />
+      <Cloud top="15%" left="60%" delay={2} size={1.2} />
+      <Cloud top="25%" left="30%" delay={4} size={0.6} />
+      <Cloud top="8%" left="80%" delay={1} size={1} />
+
+      {/* Coins */}
+      <Coin top="30%" left="15%" delay={0} />
+      <Coin top="35%" left="75%" delay={0.5} />
+      <Coin top="20%" left="50%" delay={1} />
+
+      {/* Pipes */}
+      <Pipe side="left" bottom="0" />
+      <Pipe side="right" bottom="0" />
+
+      {/* Ground */}
+      <div className="absolute bottom-0 left-0 right-0">
+        <div className="brick-pattern h-16 border-t-4 border-mario-ground" />
       </div>
 
-      {/* Glowing orbs */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] rounded-full blur-[150px] opacity-20" style={{ background: "hsl(250 90% 70%)" }} />
-        <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] rounded-full blur-[150px] opacity-15" style={{ background: "hsl(320 80% 65%)" }} />
-        <div className="absolute top-1/2 right-1/3 w-[300px] h-[300px] rounded-full blur-[120px] opacity-10" style={{ background: "hsl(170 85% 50%)" }} />
+      {/* Green hills */}
+      <div className="absolute bottom-16 left-8 pointer-events-none">
+        <div className="w-40 h-20 rounded-t-full" style={{ background: "hsl(120 65% 38%)" }} />
+      </div>
+      <div className="absolute bottom-16 right-16 pointer-events-none">
+        <div className="w-24 h-12 rounded-t-full" style={{ background: "hsl(120 60% 35%)" }} />
       </div>
 
       <div ref={ref} className="section-container text-center relative z-10">
@@ -116,16 +154,20 @@ const HeroSection = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
-          className="text-accent font-mono text-sm mb-4 tracking-widest uppercase"
+          className="text-accent font-heading text-[8px] sm:text-[10px] mb-6 tracking-widest uppercase drop-shadow-[2px_2px_0_hsl(25,60%,20%)]"
         >
-          Welcome to my portfolio
+          ⭐ Welcome to my world ⭐
         </motion.p>
 
         <motion.h1
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4 }}
-          className="font-heading text-5xl sm:text-7xl lg:text-8xl font-bold mb-6 gradient-text leading-tight"
+          className="font-heading text-2xl sm:text-4xl lg:text-5xl font-bold mb-8 leading-relaxed"
+          style={{ 
+            color: "hsl(0 0% 100%)",
+            textShadow: "4px 4px 0 hsl(0 80% 40%), -1px -1px 0 hsl(0 80% 40%), 1px -1px 0 hsl(0 80% 40%), -1px 1px 0 hsl(0 80% 40%)",
+          }}
         >
           ANIRUDH
           <br />
@@ -136,28 +178,36 @@ const HeroSection = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.6 }}
-          className="text-xl sm:text-2xl text-muted-foreground mb-10 h-8"
+          className="text-xl sm:text-2xl mb-10 h-8"
+          style={{ fontFamily: "'VT323', monospace" }}
         >
-          <span className="text-foreground">{displayed}</span>
-          <span className="animate-pulse-glow text-secondary">|</span>
+          <span className="text-foreground drop-shadow-[2px_2px_0_hsl(25,60%,20%)]">{displayed}</span>
+          <span className="animate-pulse-glow text-accent">_</span>
         </motion.div>
 
-        {/* Stats */}
+        {/* Stats as Question Blocks */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.8 }}
-          className="flex flex-wrap justify-center gap-8 sm:gap-16 mb-10"
+          className="flex flex-wrap justify-center gap-6 sm:gap-10 mb-10"
         >
           {stats.map((s, i) => {
             const count = useCounter(s.value, 2000, inView);
             return (
-              <div key={i} className="text-center">
-                <div className="font-mono text-3xl sm:text-4xl font-bold gradient-text">
+              <motion.div
+                key={i}
+                className="question-block p-4 sm:p-6 text-center"
+                animate={{ y: [0, -4, 0] }}
+                transition={{ duration: 2, delay: i * 0.3, repeat: Infinity }}
+              >
+                <div className="font-heading text-sm sm:text-lg font-bold" style={{ color: "hsl(25 60% 20%)" }}>
                   {s.prefix}{formatNumber(count)}{s.suffix}
                 </div>
-                <div className="text-sm text-muted-foreground mt-1">{s.label}</div>
-              </div>
+                <div className="text-xs mt-1" style={{ color: "hsl(25 50% 30%)", fontFamily: "'VT323', monospace", fontSize: "0.9rem" }}>
+                  {s.label}
+                </div>
+              </motion.div>
             );
           })}
         </motion.div>
@@ -171,19 +221,21 @@ const HeroSection = () => {
         >
           <a
             href="#projects"
-            className="glow-button inline-flex items-center gap-2 px-8 py-3 rounded-lg font-medium text-primary-foreground hover:opacity-90 transition"
+            className="glow-button inline-flex items-center gap-2 px-8 py-3 font-bold text-foreground hover:opacity-90 transition"
+            style={{ fontFamily: "'VT323', monospace", fontSize: "1.3rem" }}
           >
-            View Projects
+            🍄 View Projects
           </a>
           <a
             href="#contact"
-            className="inline-flex items-center gap-2 px-8 py-3 rounded-lg font-medium border border-primary/40 text-foreground hover:bg-primary/10 hover:border-primary/60 transition glow-ring"
+            className="glow-ring inline-flex items-center gap-2 px-8 py-3 font-bold bg-secondary text-foreground hover:bg-accent hover:text-accent-foreground transition"
+            style={{ fontFamily: "'VT323', monospace", fontSize: "1.3rem" }}
           >
             <Download size={18} /> Download Resume
           </a>
         </motion.div>
 
-        {/* Socials */}
+        {/* Socials as coins */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -200,7 +252,7 @@ const HeroSection = () => {
               href={href}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-11 h-11 rounded-full border border-primary/30 flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary hover:shadow-[0_0_15px_hsla(250,90%,70%,0.3)] transition-all"
+              className="w-12 h-12 rounded-full bg-accent border-4 border-[hsl(35,80%,40%)] flex items-center justify-center text-accent-foreground hover:scale-110 hover:shadow-[0_0_15px_hsla(45,100%,50%,0.5)] transition-all"
             >
               <Icon size={18} />
             </a>
@@ -212,9 +264,9 @@ const HeroSection = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.5 }}
-          className="absolute bottom-8 left-1/2 -translate-x-1/2"
+          className="absolute bottom-24 left-1/2 -translate-x-1/2"
         >
-          <ChevronDown className="animate-bounce text-primary" size={24} />
+          <ChevronDown className="animate-bounce text-accent" size={24} />
         </motion.div>
       </div>
     </section>

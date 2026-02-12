@@ -2,10 +2,10 @@ import { Github, Linkedin, Mail, ArrowUp } from "lucide-react";
 
 const Footer = () => {
   return (
-    <footer className="py-8 border-t border-border">
+    <footer className="py-8 brick-pattern border-t-4 border-mario-ground">
       <div className="section-container flex flex-col sm:flex-row items-center justify-between gap-4">
-        <p className="text-sm text-muted-foreground">
-          © 2025 Anirudh Sharma. All rights reserved.
+        <p className="text-sm text-foreground font-bold drop-shadow-[1px_1px_0_hsl(25,60%,20%)]" style={{ fontFamily: "'VT323', monospace", fontSize: "1.1rem" }}>
+          © 2025 Anirudh Sharma — Game Over? Never! 🍄
         </p>
 
         <div className="flex items-center gap-4">
@@ -19,15 +19,15 @@ const Footer = () => {
               href={href}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-muted-foreground hover:text-primary transition"
+              className="w-10 h-10 rounded-full bg-accent border-3 border-[hsl(35,80%,40%)] flex items-center justify-center text-accent-foreground hover:scale-110 transition"
             >
-              <Icon size={18} />
+              <Icon size={16} />
             </a>
           ))}
 
           <button
             onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-            className="w-8 h-8 rounded-full border border-border flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary transition ml-2"
+            className="w-10 h-10 bg-secondary border-4 border-[hsl(120,40%,25%)] flex items-center justify-center text-foreground hover:bg-accent hover:text-accent-foreground transition ml-2"
           >
             <ArrowUp size={14} />
           </button>

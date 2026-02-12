@@ -12,7 +12,8 @@ const experiences = [
       "Building Power BI dashboards for KPI tracking and business insights",
       "Implementing data quality frameworks and automated reporting",
     ],
-    color: "hsl(250 90% 70%)",
+    emoji: "⭐",
+    flag: "🇨🇭",
   },
   {
     company: "Tata Motors (India)",
@@ -23,7 +24,8 @@ const experiences = [
       "Processed 2M+ records using Python and SQL for logistics optimization",
       "Automated weekly reporting workflows saving 15+ hours/week",
     ],
-    color: "hsl(320 80% 65%)",
+    emoji: "🏎️",
+    flag: "🇮🇳",
   },
   {
     company: "Cisco (Virtual)",
@@ -34,7 +36,8 @@ const experiences = [
       "Applied statistical analysis and visualization techniques",
       "Presented actionable insights to stakeholder panels",
     ],
-    color: "hsl(170 85% 50%)",
+    emoji: "🌐",
+    flag: "🌍",
   },
   {
     company: "Durga Engineering Works",
@@ -45,7 +48,8 @@ const experiences = [
       "Improved operational efficiency through data-driven process optimization",
       "Generated weekly business intelligence reports for decision-making",
     ],
-    color: "hsl(40 90% 55%)",
+    emoji: "🔧",
+    flag: "🇮🇳",
   },
 ];
 
@@ -54,21 +58,20 @@ const ExperienceSection = () => {
   const inView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section id="experience" className="py-24 relative">
-      <div className="absolute top-1/3 left-0 w-[400px] h-[400px] rounded-full blur-[200px] opacity-8 pointer-events-none" style={{ background: "hsl(320 80% 65%)" }} />
-
+    <section id="experience" className="py-24 relative ground-section">
       <div className="section-container relative z-10">
         <motion.div ref={ref} initial={{ opacity: 0, y: 40 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6 }}>
-          <h2 className="font-heading text-3xl sm:text-4xl font-bold mb-4 text-center">
-            Work <span className="gradient-text">Experience</span>
+          <h2 className="font-heading text-lg sm:text-xl font-bold mb-4 text-center text-foreground drop-shadow-[2px_2px_0_hsl(25,60%,20%)]">
+            Work <span className="text-accent">Experience</span>
           </h2>
-          <p className="text-muted-foreground text-center mb-16 max-w-2xl mx-auto">
-            A journey through data analytics and business intelligence
+          <p className="text-muted-foreground text-center mb-16 max-w-2xl mx-auto text-lg" style={{ fontFamily: "'VT323', monospace" }}>
+            Levels completed on the journey! 🏁
           </p>
         </motion.div>
 
         <div className="relative">
-          <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-px md:-translate-x-px" style={{ background: "linear-gradient(to bottom, hsl(250 90% 70%), hsl(320 80% 65%), hsl(170 85% 50%))" }} />
+          {/* Pipe-style timeline */}
+          <div className="absolute left-6 md:left-1/2 top-0 bottom-0 w-6 md:-translate-x-3 pipe-style" />
 
           <div className="space-y-12">
             {experiences.map((exp, i) => (
@@ -79,20 +82,23 @@ const ExperienceSection = () => {
                 transition={{ duration: 0.5, delay: i * 0.15 }}
                 className={`relative flex flex-col md:flex-row items-start gap-6 ${i % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"}`}
               >
-                <div className="absolute left-4 md:left-1/2 w-4 h-4 rounded-full -translate-x-2 mt-6 z-10 ring-4 ring-background" style={{ background: exp.color, boxShadow: `0 0 12px ${exp.color}60` }} />
+                {/* Coin marker */}
+                <div className="absolute left-4 md:left-1/2 w-8 h-8 -translate-x-1 md:-translate-x-4 mt-6 z-10 rounded-full bg-accent border-4 border-[hsl(35,80%,40%)] flex items-center justify-center text-sm">
+                  {exp.emoji}
+                </div>
 
-                <div className={`ml-10 md:ml-0 md:w-1/2 ${i % 2 === 0 ? "md:pr-12 md:text-right" : "md:pl-12"}`}>
-                  <div className="glass-card p-6 rounded-xl hover:scale-[1.01] transition-transform">
+                <div className={`ml-16 md:ml-0 md:w-1/2 ${i % 2 === 0 ? "md:pr-16 md:text-right" : "md:pl-16"}`}>
+                  <div className="glass-card p-6 hover:scale-[1.01] transition-transform">
                     <div className="flex items-center gap-2 mb-2 justify-start">
-                      <Briefcase style={{ color: exp.color }} size={16} />
-                      <span className="font-mono text-xs" style={{ color: exp.color }}>{exp.period}</span>
+                      <span className="text-lg">{exp.flag}</span>
+                      <span className="font-bold text-accent" style={{ fontFamily: "'VT323', monospace", fontSize: "1.1rem" }}>{exp.period}</span>
                     </div>
-                    <h3 className="font-heading font-semibold text-lg text-start">{exp.role}</h3>
-                    <p className="text-sm text-muted-foreground mb-3 text-start">{exp.company}</p>
+                    <h3 className="font-heading text-[10px] sm:text-xs font-semibold text-start text-accent">{exp.role}</h3>
+                    <p className="text-sm text-muted-foreground mb-3 text-start" style={{ fontFamily: "'VT323', monospace", fontSize: "1rem" }}>{exp.company}</p>
                     <ul className="space-y-2 text-start">
                       {exp.achievements.map((a, j) => (
-                        <li key={j} className="text-sm text-muted-foreground flex items-start gap-2">
-                          <span className="w-1.5 h-1.5 rounded-full mt-2 flex-shrink-0" style={{ background: exp.color }} />
+                        <li key={j} className="text-sm text-muted-foreground flex items-start gap-2" style={{ fontFamily: "'VT323', monospace", fontSize: "1rem" }}>
+                          <span className="flex-shrink-0">🍄</span>
                           {a}
                         </li>
                       ))}

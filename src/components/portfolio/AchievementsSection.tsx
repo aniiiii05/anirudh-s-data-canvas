@@ -1,29 +1,9 @@
 import { motion, useInView } from "framer-motion";
-import { useRef, useState, useEffect } from "react";
-import { Trophy, TrendingUp, Award } from "lucide-react";
-
-const useScrollCounter = (target: number, inView: boolean) => {
-  const [count, setCount] = useState(0);
-  useEffect(() => {
-    if (!inView) return;
-    let start = 0;
-    const step = () => {
-      start += Math.ceil(target / 40);
-      if (start >= target) {
-        setCount(target);
-        return;
-      }
-      setCount(start);
-      requestAnimationFrame(step);
-    };
-    requestAnimationFrame(step);
-  }, [target, inView]);
-  return count;
-};
+import { useRef } from "react";
 
 const achievements = [
   {
-    icon: Trophy,
+    emoji: "🏆",
     title: "Hackathons",
     items: [
       "Smart India Hackathon participant",
@@ -32,7 +12,7 @@ const achievements = [
     ],
   },
   {
-    icon: TrendingUp,
+    emoji: "📈",
     title: "Measurable Impact",
     items: [
       "20%+ improvement in OTIF delivery scores",
@@ -41,7 +21,7 @@ const achievements = [
     ],
   },
   {
-    icon: Award,
+    emoji: "🎓",
     title: "Certifications",
     items: [
       "Data Analytics Professional",
@@ -56,19 +36,14 @@ const AchievementsSection = () => {
   const inView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section id="achievements" className="py-24">
+    <section id="achievements" className="py-24 ground-section">
       <div className="section-container">
-        <motion.div
-          ref={ref}
-          initial={{ opacity: 0, y: 40 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-        >
-          <h2 className="font-heading text-3xl sm:text-4xl font-bold mb-4 text-center">
-            Achievements & <span className="gradient-text">Recognition</span>
+        <motion.div ref={ref} initial={{ opacity: 0, y: 40 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6 }}>
+          <h2 className="font-heading text-lg sm:text-xl font-bold mb-4 text-center text-foreground drop-shadow-[2px_2px_0_hsl(25,60%,20%)]">
+            Achievements <span className="text-accent">Unlocked</span>
           </h2>
-          <p className="text-muted-foreground text-center mb-16 max-w-2xl mx-auto">
-            Milestones and accomplishments along the journey
+          <p className="text-muted-foreground text-center mb-16 max-w-2xl mx-auto text-lg" style={{ fontFamily: "'VT323', monospace" }}>
+            Trophies collected along the way! 🏆
           </p>
         </motion.div>
 
@@ -79,21 +54,22 @@ const AchievementsSection = () => {
               initial={{ opacity: 0, y: 30 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: i * 0.15 }}
-              className="glass-card p-6 rounded-xl text-center"
+              className="question-block p-6 text-center"
             >
-              <div className="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
-                <a.icon className="text-primary" size={24} />
-              </div>
-              <h3 className="font-heading font-semibold text-lg mb-4">
+              <motion.div
+                className="text-5xl mb-4"
+                animate={{ y: [0, -8, 0] }}
+                transition={{ duration: 2, delay: i * 0.3, repeat: Infinity }}
+              >
+                {a.emoji}
+              </motion.div>
+              <h3 className="font-heading text-[10px] sm:text-xs font-semibold mb-4" style={{ color: "hsl(25 60% 20%)" }}>
                 {a.title}
               </h3>
               <ul className="space-y-2 text-left">
                 {a.items.map((item, j) => (
-                  <li
-                    key={j}
-                    className="text-sm text-muted-foreground flex items-start gap-2"
-                  >
-                    <span className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 flex-shrink-0" />
+                  <li key={j} className="flex items-start gap-2" style={{ color: "hsl(25 50% 30%)", fontFamily: "'VT323', monospace", fontSize: "1.1rem" }}>
+                    <span className="flex-shrink-0">⭐</span>
                     {item}
                   </li>
                 ))}
