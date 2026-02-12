@@ -471,16 +471,13 @@ const HeroSection = () => {
         animate={{ x: 0, opacity: 1 }}
         transition={{ delay: 1.8, duration: 0.8 }}
       >
-        <motion.div
-          className="w-32 lg:w-40 h-40 lg:h-48 pointer-events-none"
+        <motion.img 
+          src={anirudhCharThinking} 
+          alt="Anirudh pixel character pose" 
+          className="w-32 lg:w-40 pointer-events-none"
           style={{ 
-            backgroundImage: `url(${anirudhCharThinking})`,
-            backgroundSize: "contain",
-            backgroundRepeat: "no-repeat",
-            backgroundPosition: "center bottom",
             imageRendering: "pixelated",
             filter: "drop-shadow(6px 6px 0 hsla(25, 60%, 15%, 0.6))",
-            mixBlendMode: "multiply",
           }} 
           animate={{ y: [0, -8, 0] }} 
           transition={{ duration: 2, delay: 0.5, repeat: Infinity, ease: "easeInOut" }} 
