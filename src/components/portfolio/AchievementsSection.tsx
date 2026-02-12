@@ -14,6 +14,17 @@ const achievements = [
     ],
   },
   {
+    emoji: "🏅",
+    title: "Awards & Recognition",
+    items: [
+      "Semi-Finalist — Smart India Hackathon (SIH)",
+      "Campus Ambassador — Cisco",
+      "Vice-President — Centre for Cognitive Activities, NIT Durgapur",
+      "67+ GitHub contributions across 10+ repositories",
+      "All projects open-sourced under MIT License",
+    ],
+  },
+  {
     emoji: "📈",
     title: "Measurable Impact",
     items: [
@@ -53,7 +64,7 @@ const AchievementsSection = () => {
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-3 gap-6">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
           {achievements.map((a, i) => (
             <motion.div
               key={a.title}

@@ -1,6 +1,6 @@
 import { motion, useInView, AnimatePresence } from "framer-motion";
 import { useRef, useState } from "react";
-import { X } from "lucide-react";
+import { X, ExternalLink } from "lucide-react";
 
 type Project = {
   title: string;
@@ -10,6 +10,7 @@ type Project = {
   category: string[];
   tech: string[];
   emoji: string;
+  github?: string;
 };
 
 const projects: Project[] = [
@@ -21,33 +22,97 @@ const projects: Project[] = [
     category: ["ai"],
     tech: ["Python", "OpenAI", "HuggingFace", "React", "LangChain", "REST APIs"],
     emoji: "🧠",
+    github: "https://github.com/aniiiii05/research.ai",
   },
   {
-    title: "MOODFLIX",
-    desc: "Real-time emotion detection via webcam with AI-powered movie recommendations based on your current mood.",
-    longDesc: "A cutting-edge platform that uses your webcam to detect facial emotions in real-time using a pre-trained emotion detection model, then leverages the TMDB API to recommend movies matching your current mood. Features live emotion visualization, genre mapping, and personalized watchlists.",
+    title: "MOODFLIX — Movie Recommender",
+    desc: "Movie recommendation system using NLP and collaborative filtering with Scikit-learn, NLTK, and Streamlit.",
+    longDesc: "A Movie Recommendation System built with Scikit-learn, NLTK, and Streamlit that delivers personalized suggestions using Natural Language Processing (NLP) and collaborative filtering. The system processes movie metadata and user preferences to generate accurate recommendations.",
     tags: ["AI & NLP"],
     category: ["ai"],
-    tech: ["React", "Webcam", "Emotion Model", "TMDB API", "Python"],
+    tech: ["Python", "Scikit-learn", "NLTK", "Streamlit", "Jupyter"],
     emoji: "🎬",
+    github: "https://github.com/aniiiii05/Movie-Recommendation-System-",
   },
   {
     title: "YouTube Channel Analytics",
-    desc: "End-to-end analytics pipeline using Python and YouTube Data API v3 to process 10K+ video metrics.",
+    desc: "End-to-end analytics pipeline using Python and YouTube Data API v3 to process 10K+ video metrics with interactive dashboards.",
     longDesc: "Developed end-to-end YouTube analytics pipeline using Python and YouTube Data API v3 to extract, process, and visualize 10K+ video metrics including views, engagement rates, and subscriber growth. Built interactive Power BI/Tableau dashboard with statistical analysis and trend forecasting for content optimization.",
     tags: ["Data Engineering", "Business Intelligence"],
     category: ["de", "bi"],
-    tech: ["Python", "YouTube API v3", "Power BI", "Tableau", "Pandas"],
+    tech: ["Python", "YouTube API v3", "Power BI", "Jupyter", "Pandas"],
     emoji: "📺",
+    github: "https://github.com/aniiiii05/YouTube-Channel-Analytics-Performance-Insights-Dashboard",
   },
   {
-    title: "E-Commerce Platform",
-    desc: "End-to-end eco-friendly marketplace with MERN stack, 95%+ mobile compatibility and scalable backend.",
-    longDesc: "Developed end-to-end eco-friendly marketplace leveraging MERN stack (MongoDB, Express.js, React, Node.js) with responsive frontend achieving 95%+ mobile compatibility. Designed MongoDB schema for flexible product categorization, user profiles, and order management with Express.js RESTful APIs for secure data transactions.",
+    title: "PowerBI Dashboards — Tata Motors",
+    desc: "Interactive OTIF dashboard monitoring delivery efficiency and supply chain bottlenecks with real-time visibility.",
+    longDesc: "Built an interactive dashboard to monitor On-Time In-Full (OTIF) performance, enabling real-time visibility of delivery efficiency and supply chain bottlenecks. Also created an Annual Tata Motors performance analysis dashboard tracking key metrics across departments.",
+    tags: ["Business Intelligence"],
+    category: ["bi"],
+    tech: ["Power BI", "DAX", "SQL", "Data Modeling"],
+    emoji: "📊",
+    github: "https://github.com/aniiiii05/PowerBI-Dashboards-TataMotors",
+  },
+  {
+    title: "Eco-Friendly E-Commerce Platform",
+    desc: "Full-stack eco-friendly marketplace with MERN stack, 95%+ mobile compatibility and scalable backend.",
+    longDesc: "Developed a full-stack eco-friendly e-commerce website designed to promote and sell sustainable products. The platform emphasizes environmental consciousness and provides users with a seamless shopping experience. Built with MongoDB, Express.js, React, and Node.js achieving 95%+ mobile compatibility.",
     tags: ["Full Stack"],
     category: ["fs"],
     tech: ["MongoDB", "Express.js", "React", "Node.js"],
     emoji: "🛒",
+    github: "https://github.com/aniiiii05/-Eco-Friendly-E-Commerce-Platform",
+  },
+  {
+    title: "News Search Platform",
+    desc: "High-performance web app delivering sub-second search across 1M+ news articles using Elasticsearch.",
+    longDesc: "A high-performance web application designed to deliver sub-second search results across 1M+ news articles using Elasticsearch. Built with mobile-first design principles to ensure seamless cross-device experience with advanced filtering and sorting capabilities.",
+    tags: ["Full Stack", "Data Engineering"],
+    category: ["fs", "de"],
+    tech: ["Elasticsearch", "HTML", "CSS", "JavaScript"],
+    emoji: "📰",
+    github: "https://github.com/aniiiii05/News-Search-Platform",
+  },
+  {
+    title: "Google Docs Clone",
+    desc: "Real-time collaborative document editor with PyQt5, Supabase, and Sockets — live text formatting & cursor sync.",
+    longDesc: "A Python-based Google Docs Clone developed with PyQt5, Supabase, and Sockets, enabling real-time collaborative editing. It features live text formatting, cursor synchronization, and multi-user support for seamless document collaboration.",
+    tags: ["Full Stack"],
+    category: ["fs"],
+    tech: ["Python", "PyQt5", "Supabase", "Sockets"],
+    emoji: "📝",
+    github: "https://github.com/aniiiii05/Google-Documents-Clone-",
+  },
+  {
+    title: "J.A.R.V.I.S. Desktop Assistant",
+    desc: "Python-based voice-controlled personal assistant for desktop — automated tasks via voice commands.",
+    longDesc: "J.A.R.V.I.S. is a Python-based voice-controlled personal assistant for your desktop. Inspired by the AI from the Iron Man movies, this project is designed to perform various automated tasks based on voice commands including web searches, app launching, and system controls.",
+    tags: ["AI & NLP"],
+    category: ["ai"],
+    tech: ["Python", "Speech Recognition", "pyttsx3", "APIs"],
+    emoji: "🤖",
+    github: "https://github.com/aniiiii05/J.A.R.V.I.S.---A-Voice-Controlled-Desktop-Assistant",
+  },
+  {
+    title: "Data Warehouse & Analytics",
+    desc: "Modern data warehouse with SQL Server including ETL processes, data modeling and analytics.",
+    longDesc: "Building a modern data warehouse with SQL Server, including ETL processes, data modeling and analytics. Designed star schema, implemented SSIS packages for data integration, and built analytical queries for business reporting.",
+    tags: ["Data Engineering"],
+    category: ["de"],
+    tech: ["T-SQL", "SQL Server", "ETL", "Data Modeling"],
+    emoji: "🏗️",
+    github: "https://github.com/aniiiii05/Data-Warehouse-and-Analytics-Project",
+  },
+  {
+    title: "Time Series Forecasting",
+    desc: "Stock price prediction using ARIMA methodology with preprocessing of time-indexed financial data.",
+    longDesc: "Developed a time series forecasting model to predict future stock prices using the ARIMA (AutoRegressive Integrated Moving Average) methodology. The project involved preprocessing time-indexed data, stationarity testing, parameter optimization, and model evaluation.",
+    tags: ["Data Engineering", "AI & NLP"],
+    category: ["de", "ai"],
+    tech: ["Python", "ARIMA", "Pandas", "Matplotlib"],
+    emoji: "📉",
+    github: "https://github.com/aniiiii05/Time-series-forecasting",
   },
 ];
 
@@ -154,11 +219,16 @@ const ProjectsSection = () => {
                   ))}
                 </div>
                 <p className="mb-6 leading-relaxed" style={{ color: "hsl(25 50% 30%)", fontFamily: "'VT323', monospace", fontSize: "1.2rem" }}>{selected.longDesc}</p>
-                <div className="flex flex-wrap gap-2">
+                <div className="flex flex-wrap gap-2 mb-4">
                   {selected.tech.map((t) => (
                     <span key={t} className="px-3 py-1 text-xs font-bold bg-secondary text-foreground border-2 border-[hsl(120,40%,25%)]" style={{ fontFamily: "'VT323', monospace" }}>{t}</span>
                   ))}
                 </div>
+                {selected.github && (
+                  <a href={selected.github} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-4 py-2 font-bold transition-all hover:scale-105" style={{ background: "hsl(25 55% 35%)", border: "3px solid hsl(25 70% 35%)", boxShadow: "3px 3px 0 hsl(25 60% 20%)", color: "hsl(45 100% 50%)", fontFamily: "'VT323', monospace", fontSize: "1.1rem" }}>
+                    <ExternalLink size={14} /> View on GitHub
+                  </a>
+                )}
               </motion.div>
             </motion.div>
           )}
