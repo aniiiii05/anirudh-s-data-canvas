@@ -1,14 +1,14 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-import { Brain, Database, Code, BarChart3, Lightbulb, Sparkles } from "lucide-react";
+import anirudhCharacter from "@/assets/anirudh-character.png";
 
 const skills = [
-  { icon: Code, label: "Python", emoji: "🐍" },
-  { icon: Database, label: "SQL", emoji: "🗄️" },
-  { icon: BarChart3, label: "Power BI", emoji: "📊" },
-  { icon: BarChart3, label: "Tableau", emoji: "📈" },
-  { icon: Brain, label: "LLMs", emoji: "🧠" },
-  { icon: Sparkles, label: "Gen AI", emoji: "✨" },
+  { label: "Python", emoji: "🐍" },
+  { label: "SQL", emoji: "🗄️" },
+  { label: "Power BI", emoji: "📊" },
+  { label: "Tableau", emoji: "📈" },
+  { label: "LLMs", emoji: "🧠" },
+  { label: "Gen AI", emoji: "✨" },
 ];
 
 const AboutSection = () => {
@@ -37,13 +37,22 @@ const AboutSection = () => {
             initial={{ opacity: 0, x: -40 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.2 }}
+            className="flex flex-col items-center gap-6"
           >
-            <div className="glass-card p-8">
+            <motion.img
+              src={anirudhCharacter}
+              alt="Anirudh pixel character"
+              className="w-40 sm:w-52 drop-shadow-[4px_4px_0_hsl(25,60%,20%)]"
+              style={{ imageRendering: "pixelated" }}
+              animate={{ y: [0, -8, 0] }}
+              transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+            />
+            <div className="glass-card p-6 w-full">
               <div className="grid grid-cols-3 gap-4">
                 {skills.map(({ label, emoji }, i) => (
                   <motion.div
                     key={label}
-                    className="flex flex-col items-center gap-2 p-4 bg-muted/50 border-2 border-mario-brick hover:border-accent transition-all"
+                    className="flex flex-col items-center gap-2 p-3 bg-muted/50 border-2 border-mario-brick hover:border-accent transition-all"
                     animate={{ y: [0, -6, 0] }}
                     transition={{ duration: 3, delay: i * 0.3, repeat: Infinity, ease: "easeInOut" }}
                   >
