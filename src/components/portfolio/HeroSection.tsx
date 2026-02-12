@@ -1,9 +1,10 @@
-import { useEffect, useState, useRef } from "react";
-import { motion } from "framer-motion";
+import { useEffect, useState, useRef, useCallback } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import anirudhCharThinking from "@/assets/anirudh-char-thinking.png";
 import anirudhCharPointing from "@/assets/anirudh-char-pointing.png";
 import anirudhPhoto from "@/assets/anirudh-photo-1.png";
 import { Github, Linkedin, Mail, Download, ChevronDown } from "lucide-react";
+import { marioSfx } from "@/lib/mario-sfx";
 
 const roles = [
   "Data Specialist",
@@ -99,34 +100,300 @@ const Castle = () => (
   </div>
 );
 
-const Pipe3D = ({ side, bottom, height = 60 }: { side: "left" | "right"; bottom: string; height?: number }) => (
-  <div className={`absolute ${side === "left" ? "left-6 sm:left-14" : "right-6 sm:right-14"} z-[6]`} style={{ bottom }}>
-    <div style={{ width: 56, height: 20, marginLeft: -8, background: "linear-gradient(90deg, hsl(120 45% 28%), hsl(120 65% 42%), hsl(120 70% 50%), hsl(120 65% 42%), hsl(120 45% 28%))", border: "3px solid hsl(120 35% 22%)", borderRadius: "4px 4px 0 0" }} />
-    <div style={{ width: 40, height, background: "linear-gradient(90deg, hsl(120 45% 25%), hsl(120 60% 38%), hsl(120 65% 45%), hsl(120 60% 38%), hsl(120 45% 25%))", border: "3px solid hsl(120 35% 22%)", borderTop: "none", boxShadow: "4px 4px 0 hsl(25 60% 20%)" }} />
-  </div>
-);
+// Interactive Pipe with plant growth on hover
+const Pipe3D = ({ side, bottom, height = 60 }: { side: "left" | "right"; bottom: string; height?: number }) => {
+  const [hovered, setHovered] = useState(false);
 
-const QuestionBlock = ({ top, left, delay }: { top: string; left: string; delay: number }) => (
-  <motion.div className="absolute pointer-events-none z-[3]" style={{ top, left }} animate={{ y: [0, -6, 0] }} transition={{ duration: 3, delay, repeat: Infinity }}>
-    <div className="flex items-center justify-center" style={{ width: 32, height: 32, background: "linear-gradient(180deg, hsl(45 100% 60%), hsl(40 90% 45%))", border: "3px solid hsl(25 70% 35%)", boxShadow: "inset -3px -3px 0 hsla(25 70% 30% / 0.5), inset 3px 3px 0 hsla(45 100% 70% / 0.5), 3px 3px 0 hsl(25 60% 20%)" }}>
-      <span className="font-heading text-[10px] font-bold" style={{ color: "hsl(25 60% 25%)" }}>?</span>
+  return (
+    <div
+      className={`absolute ${side === "left" ? "left-6 sm:left-14" : "right-6 sm:right-14"} z-[6] cursor-pointer`}
+      style={{ bottom }}
+      onMouseEnter={() => { setHovered(true); marioSfx.pipe(); }}
+      onMouseLeave={() => setHovered(false)}
+    >
+      {/* Piranha Plant growing out */}
+      <AnimatePresence>
+        {hovered && (
+          <motion.div
+            className="absolute left-1/2 -translate-x-1/2 flex flex-col items-center"
+            style={{ bottom: height + 18 }}
+            initial={{ y: 40, opacity: 0, scaleY: 0 }}
+            animate={{ y: 0, opacity: 1, scaleY: 1 }}
+            exit={{ y: 40, opacity: 0, scaleY: 0 }}
+            transition={{ duration: 0.4, ease: "easeOut" }}
+          >
+            {/* Plant head */}
+            <div className="relative">
+              <div style={{
+                width: 28, height: 18,
+                background: "linear-gradient(180deg, hsl(0 75% 45%), hsl(0 70% 35%))",
+                borderRadius: "50% 50% 0 0",
+                border: "2px solid hsl(0 50% 25%)",
+              }}>
+                {/* Teeth dots */}
+                <div className="absolute top-2 left-1 w-1.5 h-1.5 rounded-full" style={{ background: "hsl(0 0% 95%)" }} />
+                <div className="absolute top-2 left-3.5 w-1.5 h-1.5 rounded-full" style={{ background: "hsl(0 0% 95%)" }} />
+                <div className="absolute top-2 right-1 w-1.5 h-1.5 rounded-full" style={{ background: "hsl(0 0% 95%)" }} />
+              </div>
+              {/* Lips */}
+              <div style={{
+                width: 32, height: 8, marginLeft: -2,
+                background: "linear-gradient(180deg, hsl(0 80% 50%), hsl(0 70% 40%))",
+                border: "2px solid hsl(0 50% 25%)",
+                borderTop: "none",
+              }}>
+                <div className="flex justify-around pt-0.5">
+                  <div className="w-1 h-1" style={{ background: "hsl(0 0% 90%)" }} />
+                  <div className="w-1 h-1" style={{ background: "hsl(0 0% 90%)" }} />
+                  <div className="w-1 h-1" style={{ background: "hsl(0 0% 90%)" }} />
+                </div>
+              </div>
+            </div>
+            {/* Stem */}
+            <div style={{
+              width: 8, height: 30,
+              background: "linear-gradient(90deg, hsl(120 50% 30%), hsl(120 65% 42%), hsl(120 50% 30%))",
+              border: "1px solid hsl(120 40% 22%)",
+            }} />
+            {/* Leaves */}
+            <motion.div
+              className="absolute top-[22px] -left-2"
+              initial={{ scale: 0 }}
+              animate={{ scale: 1, rotate: -30 }}
+              transition={{ delay: 0.2 }}
+            >
+              <div style={{
+                width: 10, height: 6,
+                background: "hsl(120 60% 40%)",
+                borderRadius: "50%",
+                border: "1px solid hsl(120 40% 25%)",
+              }} />
+            </motion.div>
+            <motion.div
+              className="absolute top-[30px] -right-2"
+              initial={{ scale: 0 }}
+              animate={{ scale: 1, rotate: 30 }}
+              transition={{ delay: 0.3 }}
+            >
+              <div style={{
+                width: 10, height: 6,
+                background: "hsl(120 60% 38%)",
+                borderRadius: "50%",
+                border: "1px solid hsl(120 40% 25%)",
+              }} />
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Pipe top */}
+      <div style={{
+        width: 56, height: 20, marginLeft: -8,
+        background: "linear-gradient(90deg, hsl(120 45% 28%), hsl(120 65% 42%), hsl(120 70% 50%), hsl(120 65% 42%), hsl(120 45% 28%))",
+        border: "3px solid hsl(120 35% 22%)", borderRadius: "4px 4px 0 0",
+        transition: "all 0.2s",
+        boxShadow: hovered ? "0 0 16px hsla(120 70% 50% / 0.5)" : "none",
+      }} />
+      {/* Pipe body */}
+      <div style={{
+        width: 40, height,
+        background: "linear-gradient(90deg, hsl(120 45% 25%), hsl(120 60% 38%), hsl(120 65% 45%), hsl(120 60% 38%), hsl(120 45% 25%))",
+        border: "3px solid hsl(120 35% 22%)", borderTop: "none",
+        boxShadow: hovered
+          ? "4px 4px 0 hsl(25 60% 20%), 0 0 20px hsla(120 70% 50% / 0.3)"
+          : "4px 4px 0 hsl(25 60% 20%)",
+        transition: "box-shadow 0.2s",
+      }} />
     </div>
-  </motion.div>
-);
+  );
+};
 
-const BrickBlock = ({ top, left }: { top: string; left: string }) => (
-  <div className="absolute pointer-events-none z-[3]" style={{ top, left }}>
-    <div style={{ width: 32, height: 32, background: "repeating-linear-gradient(90deg, transparent 0px, transparent 13px, hsl(15 40% 35%) 13px, hsl(15 40% 35%) 15px), repeating-linear-gradient(0deg, transparent 0px, transparent 6px, hsl(15 40% 35%) 6px, hsl(15 40% 35%) 8px), linear-gradient(180deg, hsl(15 70% 50%), hsl(15 60% 42%))", border: "2px solid hsl(15 40% 30%)", boxShadow: "inset -2px -2px 0 hsla(15 40% 25% / 0.4), inset 2px 2px 0 hsla(15 80% 60% / 0.3), 3px 3px 0 hsl(25 60% 20%)" }} />
-  </div>
-);
+// Interactive Question Block - bumps on click, shows item
+const QuestionBlock = ({ top, left, delay }: { top: string; left: string; delay: number }) => {
+  const [hit, setHit] = useState(false);
+  const [showItem, setShowItem] = useState(false);
+  const [itemType] = useState(() => Math.random() > 0.5 ? "coin" : "mushroom");
 
-const Coin = ({ top, left, delay }: { top: string; left: string; delay: number }) => (
-  <motion.div className="absolute pointer-events-none z-[5]" style={{ top, left }} animate={{ rotateY: [0, 180, 360], y: [0, -5, 0] }} transition={{ duration: 2, delay, repeat: Infinity }}>
-    <div className="flex items-center justify-center" style={{ width: 24, height: 24, borderRadius: "50%", background: "radial-gradient(circle at 35% 35%, hsl(50 100% 70%), hsl(45 100% 50%), hsl(40 90% 40%))", border: "2px solid hsl(35 80% 40%)", boxShadow: "0 0 8px hsla(45 100% 50% / 0.4)" }}>
-      <span className="text-[8px] font-bold" style={{ color: "hsl(25 60% 20%)" }}>$</span>
-    </div>
-  </motion.div>
-);
+  const handleClick = useCallback(() => {
+    if (hit) return;
+    setHit(true);
+    setShowItem(true);
+    if (itemType === "coin") {
+      marioSfx.coin();
+    } else {
+      marioSfx.powerup();
+    }
+    setTimeout(() => setShowItem(false), 1200);
+    setTimeout(() => setHit(false), 300);
+  }, [hit, itemType]);
+
+  return (
+    <motion.div
+      className="absolute z-[3] cursor-pointer select-none"
+      style={{ top, left }}
+      animate={hit ? { y: [0, -12, 0] } : { y: [0, -6, 0] }}
+      transition={hit ? { duration: 0.15 } : { duration: 3, delay, repeat: Infinity }}
+      onClick={handleClick}
+      whileHover={{ scale: 1.1 }}
+    >
+      {/* Floating item */}
+      <AnimatePresence>
+        {showItem && (
+          <motion.div
+            className="absolute -top-2 left-1/2 -translate-x-1/2"
+            initial={{ y: 0, opacity: 1, scale: 0.5 }}
+            animate={{ y: -50, opacity: 0, scale: 1.2 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 1 }}
+          >
+            {itemType === "coin" ? (
+              <div className="flex items-center justify-center" style={{
+                width: 20, height: 20, borderRadius: "50%",
+                background: "radial-gradient(circle at 35% 35%, hsl(50 100% 70%), hsl(45 100% 50%))",
+                border: "2px solid hsl(35 80% 40%)",
+                boxShadow: "0 0 12px hsla(45 100% 50% / 0.6)",
+              }}>
+                <span className="text-[7px] font-bold" style={{ color: "hsl(25 60% 20%)" }}>$</span>
+              </div>
+            ) : (
+              <div className="text-xl">🍄</div>
+            )}
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      <div className="flex items-center justify-center" style={{
+        width: 32, height: 32,
+        background: hit
+          ? "linear-gradient(180deg, hsl(30 40% 45%), hsl(25 35% 35%))"
+          : "linear-gradient(180deg, hsl(45 100% 60%), hsl(40 90% 45%))",
+        border: "3px solid hsl(25 70% 35%)",
+        boxShadow: "inset -3px -3px 0 hsla(25 70% 30% / 0.5), inset 3px 3px 0 hsla(45 100% 70% / 0.5), 3px 3px 0 hsl(25 60% 20%)",
+        transition: "background 0.15s",
+      }}>
+        <span className="font-heading text-[10px] font-bold" style={{ color: "hsl(25 60% 25%)" }}>
+          {hit ? "" : "?"}
+        </span>
+      </div>
+    </motion.div>
+  );
+};
+
+// Interactive Brick Block - shakes on click
+const BrickBlock = ({ top, left }: { top: string; left: string }) => {
+  const [hit, setHit] = useState(false);
+  const [particles, setParticles] = useState<number[]>([]);
+
+  const handleClick = () => {
+    setHit(true);
+    marioSfx.bump();
+    setParticles([1, 2, 3, 4]);
+    setTimeout(() => setHit(false), 200);
+    setTimeout(() => setParticles([]), 600);
+  };
+
+  return (
+    <motion.div
+      className="absolute z-[3] cursor-pointer select-none"
+      style={{ top, left }}
+      animate={hit ? { y: [0, -6, 0], rotate: [0, -2, 2, 0] } : {}}
+      transition={{ duration: 0.15 }}
+      onClick={handleClick}
+      whileHover={{ scale: 1.05 }}
+    >
+      {/* Brick particles */}
+      <AnimatePresence>
+        {particles.map((p) => (
+          <motion.div
+            key={p}
+            className="absolute"
+            initial={{ x: 16, y: 16, opacity: 1 }}
+            animate={{
+              x: 16 + (p % 2 === 0 ? 1 : -1) * (20 + Math.random() * 15),
+              y: -20 - Math.random() * 30,
+              opacity: 0,
+              rotate: Math.random() * 360,
+            }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            <div style={{
+              width: 6, height: 6,
+              background: "hsl(15 70% 48%)",
+              border: "1px solid hsl(15 40% 30%)",
+            }} />
+          </motion.div>
+        ))}
+      </AnimatePresence>
+
+      <div style={{
+        width: 32, height: 32,
+        background: "repeating-linear-gradient(90deg, transparent 0px, transparent 13px, hsl(15 40% 35%) 13px, hsl(15 40% 35%) 15px), repeating-linear-gradient(0deg, transparent 0px, transparent 6px, hsl(15 40% 35%) 6px, hsl(15 40% 35%) 8px), linear-gradient(180deg, hsl(15 70% 50%), hsl(15 60% 42%))",
+        border: "2px solid hsl(15 40% 30%)",
+        boxShadow: "inset -2px -2px 0 hsla(15 40% 25% / 0.4), inset 2px 2px 0 hsla(15 80% 60% / 0.3), 3px 3px 0 hsl(25 60% 20%)",
+      }} />
+    </motion.div>
+  );
+};
+
+// Interactive Coin - collectable on click
+const Coin = ({ top, left, delay }: { top: string; left: string; delay: number }) => {
+  const [collected, setCollected] = useState(false);
+  const [showScore, setShowScore] = useState(false);
+
+  const handleClick = () => {
+    if (collected) return;
+    marioSfx.coin();
+    setCollected(true);
+    setShowScore(true);
+    setTimeout(() => setShowScore(false), 1000);
+    setTimeout(() => setCollected(false), 3000); // respawn after 3s
+  };
+
+  return (
+    <motion.div
+      className="absolute z-[5] cursor-pointer select-none"
+      style={{ top, left }}
+      animate={collected ? {} : { rotateY: [0, 180, 360], y: [0, -5, 0] }}
+      transition={{ duration: 2, delay, repeat: collected ? 0 : Infinity }}
+      onClick={handleClick}
+      whileHover={{ scale: 1.3 }}
+    >
+      {/* Score popup */}
+      <AnimatePresence>
+        {showScore && (
+          <motion.div
+            className="absolute -top-2 left-1/2 -translate-x-1/2 whitespace-nowrap"
+            initial={{ y: 0, opacity: 1 }}
+            animate={{ y: -40, opacity: 0 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.8 }}
+          >
+            <span className="font-heading text-[10px] font-bold" style={{
+              color: "hsl(45 100% 60%)",
+              textShadow: "1px 1px 0 hsl(25 60% 20%)",
+            }}>+200</span>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      <motion.div
+        className="flex items-center justify-center"
+        animate={collected ? { scale: [1, 1.5, 0], y: -30 } : {}}
+        transition={{ duration: 0.3 }}
+        style={{
+          width: 24, height: 24, borderRadius: "50%",
+          background: "radial-gradient(circle at 35% 35%, hsl(50 100% 70%), hsl(45 100% 50%), hsl(40 90% 40%))",
+          border: "2px solid hsl(35 80% 40%)",
+          boxShadow: "0 0 8px hsla(45 100% 50% / 0.4)",
+          opacity: collected && !showScore ? 0 : 1,
+        }}
+      >
+        <span className="text-[8px] font-bold" style={{ color: "hsl(25 60% 20%)" }}>$</span>
+      </motion.div>
+    </motion.div>
+  );
+};
 
 const HeroSection = () => {
   const [roleIndex, setRoleIndex] = useState(0);
@@ -251,7 +518,19 @@ const HeroSection = () => {
           {stats.map((s, i) => {
             const count = useCounter(s.value, 2000, inView);
             return (
-              <motion.div key={i} className="p-4 sm:p-6 text-center" style={{ background: "linear-gradient(180deg, hsl(45 100% 60%), hsl(40 90% 45%))", border: "4px solid hsl(25 70% 35%)", boxShadow: "inset -4px -4px 0 hsla(25 70% 30% / 0.5), inset 4px 4px 0 hsla(45 100% 70% / 0.5), 4px 4px 0 hsl(25 60% 20%)" }} animate={{ y: [0, -4, 0] }} transition={{ duration: 2, delay: i * 0.3, repeat: Infinity }}>
+              <motion.div
+                key={i}
+                className="p-4 sm:p-6 text-center cursor-pointer"
+                style={{
+                  background: "linear-gradient(180deg, hsl(45 100% 60%), hsl(40 90% 45%))",
+                  border: "4px solid hsl(25 70% 35%)",
+                  boxShadow: "inset -4px -4px 0 hsla(25 70% 30% / 0.5), inset 4px 4px 0 hsla(45 100% 70% / 0.5), 4px 4px 0 hsl(25 60% 20%)",
+                }}
+                animate={{ y: [0, -4, 0] }}
+                transition={{ duration: 2, delay: i * 0.3, repeat: Infinity }}
+                whileHover={{ scale: 1.1, rotate: [-1, 1, 0] }}
+                onHoverStart={() => marioSfx.coin()}
+              >
                 <div className="font-heading text-sm sm:text-lg font-bold" style={{ color: "hsl(25 60% 20%)" }}>{s.prefix}{formatNumber(count)}{s.suffix}</div>
                 <div className="text-xs mt-1" style={{ color: "hsl(25 50% 30%)", fontFamily: "'VT323', monospace", fontSize: "0.9rem" }}>{s.label}</div>
               </motion.div>
@@ -260,8 +539,28 @@ const HeroSection = () => {
         </motion.div>
 
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 1 }} className="flex flex-wrap justify-center gap-4 mb-10">
-          <a href="#projects" className="glow-button inline-flex items-center gap-2 px-8 py-3 font-bold text-foreground hover:opacity-90 transition" style={{ fontFamily: "'VT323', monospace", fontSize: "1.3rem" }}>🍄 View Projects</a>
-          <a href="/Anirudh_Sharma_Resume.pdf" target="_blank" rel="noopener noreferrer" className="glow-ring inline-flex items-center gap-2 px-8 py-3 font-bold bg-secondary text-foreground hover:bg-accent hover:text-accent-foreground transition" style={{ fontFamily: "'VT323', monospace", fontSize: "1.3rem" }}><Download size={18} /> Download Resume</a>
+          <motion.a
+            href="#projects"
+            className="glow-button inline-flex items-center gap-2 px-8 py-3 font-bold text-foreground hover:opacity-90 transition"
+            style={{ fontFamily: "'VT323', monospace", fontSize: "1.3rem" }}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            onHoverStart={() => marioSfx.powerup()}
+          >
+            🍄 View Projects
+          </motion.a>
+          <motion.a
+            href="/Anirudh_Sharma_Resume.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="glow-ring inline-flex items-center gap-2 px-8 py-3 font-bold bg-secondary text-foreground hover:bg-accent hover:text-accent-foreground transition"
+            style={{ fontFamily: "'VT323', monospace", fontSize: "1.3rem" }}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            onHoverStart={() => marioSfx.oneUp()}
+          >
+            <Download size={18} /> Download Resume
+          </motion.a>
         </motion.div>
 
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.2 }} className="flex justify-center gap-6">
@@ -270,9 +569,24 @@ const HeroSection = () => {
             { icon: Github, href: "https://github.com/aniiiii05", label: "GitHub" },
             { icon: Mail, href: "mailto:sharma.aniiirudh@gmail.com", label: "Email" },
           ].map(({ icon: Icon, href, label }) => (
-            <a key={label} href={href} target="_blank" rel="noopener noreferrer" className="w-12 h-12 flex items-center justify-center text-accent-foreground hover:scale-110 transition-all" style={{ borderRadius: "50%", background: "radial-gradient(circle at 35% 35%, hsl(50 100% 70%), hsl(45 100% 50%))", border: "3px solid hsl(35 80% 40%)", boxShadow: "inset -2px -2px 0 hsla(35 70% 30% / 0.4), 0 0 12px hsla(45 100% 50% / 0.3)" }}>
+            <motion.a
+              key={label}
+              href={href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-12 h-12 flex items-center justify-center text-accent-foreground transition-all"
+              style={{
+                borderRadius: "50%",
+                background: "radial-gradient(circle at 35% 35%, hsl(50 100% 70%), hsl(45 100% 50%))",
+                border: "3px solid hsl(35 80% 40%)",
+                boxShadow: "inset -2px -2px 0 hsla(35 70% 30% / 0.4), 0 0 12px hsla(45 100% 50% / 0.3)",
+              }}
+              whileHover={{ scale: 1.2, rotate: 10 }}
+              whileTap={{ scale: 0.9 }}
+              onHoverStart={() => marioSfx.stomp()}
+            >
               <Icon size={18} />
-            </a>
+            </motion.a>
           ))}
         </motion.div>
 
