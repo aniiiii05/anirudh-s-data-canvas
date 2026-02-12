@@ -37,24 +37,23 @@ const Navigation = () => {
       initial={{ y: -80 }}
       animate={{ y: 0 }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled ? "glass-card border-b" : "bg-transparent"
+        scrolled ? "glass-card border-b shadow-[0_4px_30px_hsla(250,90%,70%,0.08)]" : "bg-transparent"
       }`}
     >
       <div className="section-container flex items-center justify-between h-16">
-        <a href="#" className="font-heading text-xl font-bold gradient-text">
+        <a href="#" className="font-heading text-2xl font-bold gradient-text">
           AS
         </a>
 
-        {/* Desktop */}
         <div className="hidden md:flex items-center gap-8">
           {navItems.map((item) => (
             <a
               key={item.href}
               href={item.href}
-              className={`text-sm font-medium transition-colors hover:text-primary ${
+              className={`text-sm font-medium transition-all duration-200 ${
                 activeSection === item.href.slice(1)
-                  ? "text-primary"
-                  : "text-muted-foreground"
+                  ? "gradient-text font-semibold"
+                  : "text-muted-foreground hover:text-foreground"
               }`}
             >
               {item.label}
@@ -62,16 +61,11 @@ const Navigation = () => {
           ))}
         </div>
 
-        {/* Mobile toggle */}
-        <button
-          className="md:hidden text-foreground"
-          onClick={() => setMobileOpen(!mobileOpen)}
-        >
+        <button className="md:hidden text-foreground" onClick={() => setMobileOpen(!mobileOpen)}>
           {mobileOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
       </div>
 
-      {/* Mobile menu */}
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
@@ -86,7 +80,7 @@ const Navigation = () => {
                   key={item.href}
                   href={item.href}
                   onClick={() => setMobileOpen(false)}
-                  className="text-sm font-medium text-muted-foreground hover:text-primary"
+                  className="text-sm font-medium text-muted-foreground hover:text-primary transition"
                 >
                   {item.label}
                 </a>

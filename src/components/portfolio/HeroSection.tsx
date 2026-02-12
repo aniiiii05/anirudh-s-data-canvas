@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef, useCallback } from "react";
+import { useEffect, useState, useRef } from "react";
 import { motion } from "framer-motion";
 import { Github, Linkedin, Mail, Download, ChevronDown } from "lucide-react";
 
@@ -38,16 +38,22 @@ const formatNumber = (n: number) => {
 };
 
 const Particle = ({ i }: { i: number }) => {
-  const size = Math.random() * 3 + 1;
+  const size = Math.random() * 4 + 1;
   const x = Math.random() * 100;
   const duration = Math.random() * 20 + 10;
   const delay = Math.random() * 10;
+  const colors = [
+    "bg-primary/30",
+    "bg-secondary/30",
+    "bg-accent/30",
+  ];
+  const color = colors[i % colors.length];
   return (
     <motion.div
-      className="absolute rounded-full bg-primary/20"
+      className={`absolute rounded-full ${color}`}
       style={{ width: size, height: size, left: `${x}%` }}
       initial={{ y: "100vh", opacity: 0 }}
-      animate={{ y: "-10vh", opacity: [0, 0.8, 0] }}
+      animate={{ y: "-10vh", opacity: [0, 1, 0] }}
       transition={{ duration, delay, repeat: Infinity, ease: "linear" }}
     />
   );
@@ -74,19 +80,13 @@ const HeroSection = () => {
     let timeout: NodeJS.Timeout;
     if (!deleting) {
       if (displayed.length < current.length) {
-        timeout = setTimeout(
-          () => setDisplayed(current.slice(0, displayed.length + 1)),
-          60
-        );
+        timeout = setTimeout(() => setDisplayed(current.slice(0, displayed.length + 1)), 60);
       } else {
         timeout = setTimeout(() => setDeleting(true), 2000);
       }
     } else {
       if (displayed.length > 0) {
-        timeout = setTimeout(
-          () => setDisplayed(displayed.slice(0, -1)),
-          30
-        );
+        timeout = setTimeout(() => setDisplayed(displayed.slice(0, -1)), 30);
       } else {
         setDeleting(false);
         setRoleIndex((i) => (i + 1) % roles.length);
@@ -99,14 +99,16 @@ const HeroSection = () => {
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-16">
       {/* Particles */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {Array.from({ length: 30 }).map((_, i) => (
+        {Array.from({ length: 40 }).map((_, i) => (
           <Particle key={i} i={i} />
         ))}
       </div>
 
-      {/* Radial gradient bg */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full bg-primary/5 blur-[120px]" />
+      {/* Glowing orbs */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] rounded-full blur-[150px] opacity-20" style={{ background: "hsl(250 90% 70%)" }} />
+        <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] rounded-full blur-[150px] opacity-15" style={{ background: "hsl(320 80% 65%)" }} />
+        <div className="absolute top-1/2 right-1/3 w-[300px] h-[300px] rounded-full blur-[120px] opacity-10" style={{ background: "hsl(170 85% 50%)" }} />
       </div>
 
       <div ref={ref} className="section-container text-center relative z-10">
@@ -114,7 +116,7 @@ const HeroSection = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
-          className="text-primary font-mono text-sm mb-4 tracking-widest uppercase"
+          className="text-accent font-mono text-sm mb-4 tracking-widest uppercase"
         >
           Welcome to my portfolio
         </motion.p>
@@ -136,8 +138,8 @@ const HeroSection = () => {
           transition={{ delay: 0.6 }}
           className="text-xl sm:text-2xl text-muted-foreground mb-10 h-8"
         >
-          <span>{displayed}</span>
-          <span className="animate-pulse-glow text-primary">|</span>
+          <span className="text-foreground">{displayed}</span>
+          <span className="animate-pulse-glow text-secondary">|</span>
         </motion.div>
 
         {/* Stats */}
@@ -152,13 +154,9 @@ const HeroSection = () => {
             return (
               <div key={i} className="text-center">
                 <div className="font-mono text-3xl sm:text-4xl font-bold gradient-text">
-                  {s.prefix}
-                  {formatNumber(count)}
-                  {s.suffix}
+                  {s.prefix}{formatNumber(count)}{s.suffix}
                 </div>
-                <div className="text-sm text-muted-foreground mt-1">
-                  {s.label}
-                </div>
+                <div className="text-sm text-muted-foreground mt-1">{s.label}</div>
               </div>
             );
           })}
@@ -173,13 +171,13 @@ const HeroSection = () => {
         >
           <a
             href="#projects"
-            className="glow-button inline-flex items-center gap-2 px-8 py-3 rounded-lg font-medium bg-primary text-primary-foreground hover:opacity-90 transition"
+            className="glow-button inline-flex items-center gap-2 px-8 py-3 rounded-lg font-medium text-primary-foreground hover:opacity-90 transition"
           >
             View Projects
           </a>
           <a
             href="#contact"
-            className="inline-flex items-center gap-2 px-8 py-3 rounded-lg font-medium border border-border text-foreground hover:bg-muted transition"
+            className="inline-flex items-center gap-2 px-8 py-3 rounded-lg font-medium border border-primary/40 text-foreground hover:bg-primary/10 hover:border-primary/60 transition glow-ring"
           >
             <Download size={18} /> Download Resume
           </a>
@@ -202,7 +200,7 @@ const HeroSection = () => {
               href={href}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-10 h-10 rounded-full border border-border flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary transition"
+              className="w-11 h-11 rounded-full border border-primary/30 flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary hover:shadow-[0_0_15px_hsla(250,90%,70%,0.3)] transition-all"
             >
               <Icon size={18} />
             </a>
@@ -216,7 +214,7 @@ const HeroSection = () => {
           transition={{ delay: 1.5 }}
           className="absolute bottom-8 left-1/2 -translate-x-1/2"
         >
-          <ChevronDown className="animate-bounce text-muted-foreground" size={24} />
+          <ChevronDown className="animate-bounce text-primary" size={24} />
         </motion.div>
       </div>
     </section>
