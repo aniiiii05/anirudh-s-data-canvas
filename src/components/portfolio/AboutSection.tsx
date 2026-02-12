@@ -3,12 +3,12 @@ import { useRef } from "react";
 import { Brain, Database, Code, BarChart3, Lightbulb, Sparkles } from "lucide-react";
 
 const skills = [
-  { icon: Code, label: "Python", color: "text-[hsl(250,90%,70%)]" },
-  { icon: Database, label: "SQL", color: "text-accent" },
-  { icon: BarChart3, label: "Power BI", color: "text-secondary" },
-  { icon: BarChart3, label: "Tableau", color: "text-[hsl(250,90%,70%)]" },
-  { icon: Brain, label: "LLMs", color: "text-secondary" },
-  { icon: Sparkles, label: "Gen AI", color: "text-accent" },
+  { icon: Code, label: "Python", emoji: "🐍" },
+  { icon: Database, label: "SQL", emoji: "🗄️" },
+  { icon: BarChart3, label: "Power BI", emoji: "📊" },
+  { icon: BarChart3, label: "Tableau", emoji: "📈" },
+  { icon: Brain, label: "LLMs", emoji: "🧠" },
+  { icon: Sparkles, label: "Gen AI", emoji: "✨" },
 ];
 
 const AboutSection = () => {
@@ -16,10 +16,7 @@ const AboutSection = () => {
   const inView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section id="about" className="py-24 relative">
-      {/* Background glow */}
-      <div className="absolute top-0 right-0 w-[400px] h-[400px] rounded-full blur-[200px] opacity-10 pointer-events-none" style={{ background: "hsl(320 80% 65%)" }} />
-
+    <section id="about" className="py-24 relative" style={{ background: "linear-gradient(180deg, hsl(210 75% 58%), hsl(210 70% 55%))" }}>
       <div className="section-container relative z-10">
         <motion.div
           ref={ref}
@@ -27,10 +24,10 @@ const AboutSection = () => {
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="font-heading text-3xl sm:text-4xl font-bold mb-4 text-center">
-            About <span className="gradient-text">Me</span>
+          <h2 className="font-heading text-lg sm:text-xl font-bold mb-4 text-center text-foreground drop-shadow-[2px_2px_0_hsl(25,60%,20%)]">
+            About <span className="text-accent">Me</span>
           </h2>
-          <p className="text-muted-foreground text-center mb-16 max-w-2xl mx-auto">
+          <p className="text-muted-foreground text-center mb-16 max-w-2xl mx-auto text-lg" style={{ fontFamily: "'VT323', monospace" }}>
             Turning raw data into actionable insights and building AI-powered solutions
           </p>
         </motion.div>
@@ -40,19 +37,18 @@ const AboutSection = () => {
             initial={{ opacity: 0, x: -40 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="relative"
           >
-            <div className="glass-card p-8 rounded-2xl gradient-border">
+            <div className="glass-card p-8">
               <div className="grid grid-cols-3 gap-4">
-                {skills.map(({ icon: Icon, label, color }, i) => (
+                {skills.map(({ label, emoji }, i) => (
                   <motion.div
                     key={label}
-                    className="flex flex-col items-center gap-2 p-4 rounded-xl bg-muted/30 hover:bg-muted/60 transition-all"
-                    animate={{ y: [0, -8, 0] }}
+                    className="flex flex-col items-center gap-2 p-4 bg-muted/50 border-2 border-mario-brick hover:border-accent transition-all"
+                    animate={{ y: [0, -6, 0] }}
                     transition={{ duration: 3, delay: i * 0.3, repeat: Infinity, ease: "easeInOut" }}
                   >
-                    <Icon className={color} size={28} />
-                    <span className="text-xs font-mono text-muted-foreground">{label}</span>
+                    <span className="text-2xl">{emoji}</span>
+                    <span className="text-xs text-foreground" style={{ fontFamily: "'VT323', monospace", fontSize: "1rem" }}>{label}</span>
                   </motion.div>
                 ))}
               </div>
@@ -65,27 +61,27 @@ const AboutSection = () => {
             transition={{ duration: 0.6, delay: 0.3 }}
             className="space-y-4"
           >
-            <p className="text-foreground leading-relaxed">
-              I'm a <strong className="gradient-text">Data Specialist & AI Enthusiast</strong> with
-              3+ years of experience transforming complex datasets into strategic business insights.
-              My work spans data analysis, business intelligence, and cutting-edge AI applications.
-            </p>
-            <p className="text-muted-foreground leading-relaxed">
-              Currently exploring the intersection of <strong className="text-secondary">Generative AI</strong> and
-              data analytics — building tools that leverage LLMs, NLP, and prompt engineering to
-              automate research, detect emotions, and deliver intelligent recommendations.
-            </p>
-            <p className="text-muted-foreground leading-relaxed">
-              Based in <strong className="text-accent">Kolkata, India</strong>, working remotely as a Data Specialist. 
-              From architecting ETL pipelines processing 2M+ records to developing AI-powered
-              applications, I bridge the gap between raw data and real-world impact.
-            </p>
+            <div className="glass-card p-6">
+              <p className="text-foreground leading-relaxed text-lg" style={{ fontFamily: "'VT323', monospace" }}>
+                I'm a <strong className="text-accent">Data Specialist & AI Enthusiast</strong> with
+                3+ years of experience transforming complex datasets into strategic business insights.
+                My work spans data analysis, business intelligence, and cutting-edge AI applications.
+              </p>
+              <p className="text-muted-foreground leading-relaxed mt-3 text-lg" style={{ fontFamily: "'VT323', monospace" }}>
+                Currently exploring the intersection of <strong className="text-primary">Generative AI</strong> and
+                data analytics — building tools that leverage LLMs, NLP, and prompt engineering.
+              </p>
+              <p className="text-muted-foreground leading-relaxed mt-3 text-lg" style={{ fontFamily: "'VT323', monospace" }}>
+                Based in <strong className="text-secondary">Kolkata, India</strong> 🇮🇳, working remotely as a Data Specialist.
+              </p>
+            </div>
 
             <div className="flex flex-wrap gap-3 pt-4">
-              {["Data Analysis", "AI/ML", "Python", "SQL", "Power BI", "LLMs"].map((tag) => (
+              {["🍄 Data Analysis", "⭐ AI/ML", "🐍 Python", "🗄️ SQL", "📊 Power BI", "🧠 LLMs"].map((tag) => (
                 <span
                   key={tag}
-                  className="px-3 py-1 rounded-full text-xs font-mono border border-primary/30 text-primary bg-primary/5 hover:bg-primary/10 transition"
+                  className="px-3 py-1 text-sm font-bold bg-accent text-accent-foreground border-2 border-[hsl(35,80%,40%)]"
+                  style={{ fontFamily: "'VT323', monospace", fontSize: "1rem", boxShadow: "2px 2px 0 hsl(25,60%,20%)" }}
                 >
                   {tag}
                 </span>

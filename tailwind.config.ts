@@ -14,9 +14,9 @@ export default {
     },
     extend: {
       fontFamily: {
-        sans: ["Inter", "sans-serif"],
-        heading: ["Space Grotesk", "sans-serif"],
-        mono: ["JetBrains Mono", "monospace"],
+        sans: ["VT323", "monospace"],
+        heading: ["Press Start 2P", "cursive"],
+        mono: ["Press Start 2P", "cursive"],
       },
       colors: {
         border: "hsl(var(--border))",
@@ -52,6 +52,16 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        mario: {
+          red: "hsl(var(--mario-red))",
+          green: "hsl(var(--mario-green))",
+          blue: "hsl(var(--mario-blue))",
+          gold: "hsl(var(--mario-gold))",
+          brown: "hsl(var(--mario-brown))",
+          brick: "hsl(var(--mario-brick))",
+          sky: "hsl(var(--mario-sky))",
+          ground: "hsl(var(--mario-ground))",
+        },
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",
           foreground: "hsl(var(--sidebar-foreground))",
@@ -85,12 +95,17 @@ export default {
           "0%, 100%": { opacity: "0.4" },
           "50%": { opacity: "1" },
         },
+        "cloud-drift": {
+          "0%": { transform: "translateX(-100%)" },
+          "100%": { transform: "translateX(100vw)" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
         float: "float 3s ease-in-out infinite",
         "pulse-glow": "pulse-glow 2s ease-in-out infinite",
+        "cloud-drift": "cloud-drift 30s linear infinite",
       },
     },
   },

@@ -37,24 +37,25 @@ const Navigation = () => {
       initial={{ y: -80 }}
       animate={{ y: 0 }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled ? "glass-card border-b shadow-[0_4px_30px_hsla(250,90%,70%,0.08)]" : "bg-transparent"
+        scrolled ? "brick-pattern border-b-4 border-mario-ground shadow-[0_4px_0_hsl(25,60%,25%)]" : "bg-transparent"
       }`}
     >
       <div className="section-container flex items-center justify-between h-16">
-        <a href="#" className="font-heading text-2xl font-bold gradient-text">
-          AS
+        <a href="#" className="font-heading text-xs sm:text-sm font-bold text-accent drop-shadow-[2px_2px_0_hsl(25,60%,20%)]">
+          ⭐ AS ⭐
         </a>
 
-        <div className="hidden md:flex items-center gap-8">
+        <div className="hidden md:flex items-center gap-6">
           {navItems.map((item) => (
             <a
               key={item.href}
               href={item.href}
-              className={`text-sm font-medium transition-all duration-200 ${
+              className={`text-sm font-bold transition-all duration-200 uppercase drop-shadow-[1px_1px_0_hsl(25,60%,20%)] ${
                 activeSection === item.href.slice(1)
-                  ? "gradient-text font-semibold"
-                  : "text-muted-foreground hover:text-foreground"
+                  ? "text-accent scale-110"
+                  : "text-foreground hover:text-accent"
               }`}
+              style={{ fontFamily: "'VT323', monospace", fontSize: "1.2rem" }}
             >
               {item.label}
             </a>
@@ -72,7 +73,7 @@ const Navigation = () => {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden glass-card border-t"
+            className="md:hidden brick-pattern border-t-4 border-mario-ground"
           >
             <div className="flex flex-col gap-4 p-6">
               {navItems.map((item) => (
@@ -80,9 +81,10 @@ const Navigation = () => {
                   key={item.href}
                   href={item.href}
                   onClick={() => setMobileOpen(false)}
-                  className="text-sm font-medium text-muted-foreground hover:text-primary transition"
+                  className="text-lg font-bold text-foreground hover:text-accent transition uppercase"
+                  style={{ fontFamily: "'VT323', monospace" }}
                 >
-                  {item.label}
+                  🍄 {item.label}
                 </a>
               ))}
             </div>
