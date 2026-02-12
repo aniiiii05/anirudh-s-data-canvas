@@ -1,6 +1,7 @@
 import { useEffect, useState, useRef } from "react";
 import { motion } from "framer-motion";
-import anirudhCharacter from "@/assets/anirudh-character.png";
+import anirudhPoses1 from "@/assets/anirudh-poses-1.png";
+import anirudhPoses2 from "@/assets/anirudh-poses-2.png";
 import anirudhPhoto from "@/assets/anirudh-photo-1.png";
 import { Github, Linkedin, Mail, Download, ChevronDown } from "lucide-react";
 
@@ -195,8 +196,8 @@ const HeroSection = () => {
       <Pipe3D side="right" bottom="64px" height={50} />
 
       {/* Photo frame as "Player 1" card */}
-      <motion.div className="absolute bottom-28 left-[8%] sm:left-[15%] z-[8] hidden lg:block" initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 1.5, duration: 0.6 }}>
-        <div style={{ border: "6px solid hsl(45 100% 50%)", boxShadow: "inset -4px -4px 0 hsla(25 70% 30% / 0.5), inset 4px 4px 0 hsla(45 100% 70% / 0.5), 6px 6px 0 hsl(25 60% 20%)", width: 130, height: 130, overflow: "hidden", background: "hsl(25 55% 35%)" }}>
+      <motion.div className="absolute bottom-28 left-[3%] sm:left-[5%] z-[8] hidden lg:block xl:hidden" initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 1.5, duration: 0.6 }}>
+        <div style={{ border: "6px solid hsl(45 100% 50%)", boxShadow: "inset -4px -4px 0 hsla(25 70% 30% / 0.5), inset 4px 4px 0 hsla(45 100% 70% / 0.5), 6px 6px 0 hsl(25 60% 20%)", width: 110, height: 110, overflow: "hidden", background: "hsl(25 55% 35%)" }}>
           <img src={anirudhPhoto} alt="Anirudh Sharma" className="w-full h-full object-cover" />
         </div>
         <div className="text-center mt-2">
@@ -204,8 +205,45 @@ const HeroSection = () => {
         </div>
       </motion.div>
 
-      {/* Pixel character */}
-      <motion.img src={anirudhCharacter} alt="Anirudh pixel character" className="absolute bottom-20 right-[18%] sm:right-[20%] w-28 sm:w-36 lg:w-44 pointer-events-none z-[7]" style={{ imageRendering: "pixelated", mixBlendMode: "multiply", filter: "drop-shadow(4px 4px 0 hsl(25 60% 20%))" }} animate={{ y: [0, -20, 0] }} transition={{ duration: 1.2, repeat: Infinity, ease: "easeInOut" }} />
+      {/* Pixel character - walking pose */}
+      <motion.div 
+        className="absolute bottom-20 right-[12%] sm:right-[16%] z-[7] hidden md:block"
+        initial={{ x: 50, opacity: 0 }}
+        animate={{ x: 0, opacity: 1 }}
+        transition={{ delay: 1.8, duration: 0.8 }}
+      >
+        <motion.img 
+          src={anirudhPoses2} 
+          alt="Anirudh pixel character" 
+          className="w-36 sm:w-44 lg:w-52 pointer-events-none"
+          style={{ 
+            imageRendering: "pixelated",
+            filter: "drop-shadow(6px 6px 0 hsla(25, 60%, 15%, 0.6))",
+          }} 
+          animate={{ y: [0, -12, 0] }} 
+          transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }} 
+        />
+      </motion.div>
+
+      {/* Second character pose - left side accent */}
+      <motion.div 
+        className="absolute bottom-24 left-[6%] sm:left-[10%] z-[7] hidden xl:block"
+        initial={{ x: -50, opacity: 0 }}
+        animate={{ x: 0, opacity: 1 }}
+        transition={{ delay: 2.2, duration: 0.8 }}
+      >
+        <motion.img 
+          src={anirudhPoses1} 
+          alt="Anirudh pixel character pose" 
+          className="w-32 lg:w-40 pointer-events-none"
+          style={{ 
+            imageRendering: "pixelated",
+            filter: "drop-shadow(6px 6px 0 hsla(25, 60%, 15%, 0.6))",
+          }} 
+          animate={{ y: [0, -8, 0] }} 
+          transition={{ duration: 2, delay: 0.5, repeat: Infinity, ease: "easeInOut" }} 
+        />
+      </motion.div>
 
       {/* 3D Ground */}
       <div className="absolute bottom-0 left-0 right-0 z-[3]">
