@@ -1,5 +1,6 @@
 import Navigation from "@/components/portfolio/Navigation";
 import HeroSection from "@/components/portfolio/HeroSection";
+import MarioMusic from "@/components/portfolio/MarioMusic";
 import AboutSection from "@/components/portfolio/AboutSection";
 import CompetenciesSection from "@/components/portfolio/CompetenciesSection";
 import SkillsSection from "@/components/portfolio/SkillsSection";
@@ -14,6 +15,7 @@ import Footer from "@/components/portfolio/Footer";
 const Index = () => {
   return (
     <div className="min-h-screen bg-background">
+      <MarioMusic />
       <Navigation />
       <HeroSection />
       <AboutSection />
