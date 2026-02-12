@@ -5,15 +5,15 @@ import { Github, Linkedin, Mail, Download, ChevronDown } from "lucide-react";
 
 const roles = [
   "Data Specialist",
-  "AI Enthusiast",
+  "Data Analyst",
   "Python & SQL Expert",
   "Business Intelligence Analyst",
 ];
 
 const stats = [
-  { value: 2000000, suffix: "+", label: "Records Analyzed", prefix: "" },
-  { value: 20, suffix: "%+", label: "Process Improvements", prefix: "" },
-  { value: 3, suffix: "+", label: "Years Experience", prefix: "" },
+  { value: 2000000, suffix: "+", label: "Daily Records", prefix: "" },
+  { value: 35, suffix: "%", label: "Error Reduction", prefix: "" },
+  { value: 50, suffix: "K+", label: "Records Analyzed", prefix: "" },
 ];
 
 const useCounter = (target: number, duration = 2000, start = false) => {
@@ -38,7 +38,6 @@ const formatNumber = (n: number) => {
   return n.toString();
 };
 
-// Mario Cloud component
 const Cloud = ({ top, left, delay, size = 1 }: { top: string; left: string; delay: number; size?: number }) => (
   <motion.div
     className="absolute pointer-events-none"
@@ -53,7 +52,6 @@ const Cloud = ({ top, left, delay, size = 1 }: { top: string; left: string; dela
         <div className="w-10 h-10 rounded-full bg-white -mt-2 -ml-3" />
         <div className="w-6 h-6 rounded-full bg-white -ml-1" />
       </div>
-      {/* Cloud eyes */}
       <div className="absolute top-3 left-6 flex gap-4">
         <div className="w-1.5 h-2 bg-[hsl(25,60%,20%)] rounded-sm" />
         <div className="w-1.5 h-2 bg-[hsl(25,60%,20%)] rounded-sm" />
@@ -62,7 +60,6 @@ const Cloud = ({ top, left, delay, size = 1 }: { top: string; left: string; dela
   </motion.div>
 );
 
-// Green pipe decoration
 const Pipe = ({ side, bottom }: { side: "left" | "right"; bottom: string }) => (
   <div className={`absolute ${side}-4 sm:${side}-12`} style={{ bottom }}>
     <div className="pipe-style rounded-t-sm" style={{ width: 48, height: 24, marginLeft: -4, marginBottom: -2 }} />
@@ -70,7 +67,6 @@ const Pipe = ({ side, bottom }: { side: "left" | "right"; bottom: string }) => (
   </div>
 );
 
-// Coin
 const Coin = ({ top, left, delay }: { top: string; left: string; delay: number }) => (
   <motion.div
     className="absolute w-6 h-6 rounded-full bg-accent border-2 border-[hsl(35,80%,40%)] flex items-center justify-center pointer-events-none"
@@ -122,7 +118,6 @@ const HeroSection = () => {
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-16"
       style={{ background: "linear-gradient(180deg, hsl(210 80% 65%) 0%, hsl(210 75% 58%) 60%, hsl(210 70% 50%) 100%)" }}>
       
-      {/* Clouds */}
       <Cloud top="10%" left="5%" delay={0} size={0.8} />
       <Cloud top="15%" left="60%" delay={2} size={1.2} />
       <Cloud top="25%" left="30%" delay={4} size={0.6} />
@@ -138,21 +133,17 @@ const HeroSection = () => {
         transition={{ duration: 1.2, repeat: Infinity, ease: "easeInOut" }}
       />
 
-      {/* Coins */}
       <Coin top="30%" left="15%" delay={0} />
       <Coin top="35%" left="75%" delay={0.5} />
       <Coin top="20%" left="50%" delay={1} />
 
-      {/* Pipes */}
       <Pipe side="left" bottom="0" />
       <Pipe side="right" bottom="0" />
 
-      {/* Ground */}
       <div className="absolute bottom-0 left-0 right-0">
         <div className="brick-pattern h-16 border-t-4 border-mario-ground" />
       </div>
 
-      {/* Green hills */}
       <div className="absolute bottom-16 left-8 pointer-events-none">
         <div className="w-40 h-20 rounded-t-full" style={{ background: "hsl(120 65% 38%)" }} />
       </div>
@@ -196,7 +187,6 @@ const HeroSection = () => {
           <span className="animate-pulse-glow text-accent">_</span>
         </motion.div>
 
-        {/* Stats as Question Blocks */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -223,7 +213,6 @@ const HeroSection = () => {
           })}
         </motion.div>
 
-        {/* CTAs */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -238,7 +227,9 @@ const HeroSection = () => {
             🍄 View Projects
           </a>
           <a
-            href="#contact"
+            href="/Anirudh_Sharma_Resume.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
             className="glow-ring inline-flex items-center gap-2 px-8 py-3 font-bold bg-secondary text-foreground hover:bg-accent hover:text-accent-foreground transition"
             style={{ fontFamily: "'VT323', monospace", fontSize: "1.3rem" }}
           >
@@ -246,7 +237,6 @@ const HeroSection = () => {
           </a>
         </motion.div>
 
-        {/* Socials as coins */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -256,7 +246,7 @@ const HeroSection = () => {
           {[
             { icon: Linkedin, href: "https://www.linkedin.com/in/-anirudh-sharma/", label: "LinkedIn" },
             { icon: Github, href: "https://github.com/aniiiii05", label: "GitHub" },
-            { icon: Mail, href: "mailto:anirudh@example.com", label: "Email" },
+            { icon: Mail, href: "mailto:sharma.aniiirudh@gmail.com", label: "Email" },
           ].map(({ icon: Icon, href, label }) => (
             <a
               key={label}
@@ -270,7 +260,6 @@ const HeroSection = () => {
           ))}
         </motion.div>
 
-        {/* Scroll indicator */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}

@@ -4,21 +4,21 @@ import { useRef } from "react";
 const activities = [
   {
     emoji: "👑",
-    title: "CCA Vice-President",
-    desc: "Led the Cultural and Co-curricular Activities committee, organizing 15+ events for 500+ students annually.",
-    stat: "500+ students",
+    title: "VP Operations & Strategy",
+    desc: "Led operations and strategy for 50+ volunteers and organizers at CCA, NIT Durgapur, across multiple events with cumulative footfall of 30,000+.",
+    stat: "30,000+ footfall",
+  },
+  {
+    emoji: "💰",
+    title: "Budget & Vendor Management",
+    desc: "Managed event budgets of approximately ₹5-10L and negotiated vendor contracts to optimize cost and delivery.",
+    stat: "₹5-10L budgets",
   },
   {
     emoji: "🎪",
-    title: "Event Organizing",
-    desc: "Coordinated technical workshops, hackathons, and inter-college competitions with cross-functional teams.",
-    stat: "15+ events",
-  },
-  {
-    emoji: "📰",
-    title: "Rotary Club Editor",
-    desc: "Served as editor for the Rotary Club newsletter, managing content creation and publication.",
-    stat: "Monthly editions",
+    title: "Event Logistics",
+    desc: "Planned logistics and resource allocation to meet tight timelines while maintaining event quality across multiple events.",
+    stat: "50+ volunteers",
   },
 ];
 
@@ -34,7 +34,7 @@ const LeadershipSection = () => {
             Leadership <span className="text-accent">Quests</span>
           </h2>
           <p className="text-muted-foreground text-center mb-16 max-w-2xl mx-auto text-lg" style={{ fontFamily: "'VT323', monospace" }}>
-            Side quests completed with flying colors! 🚩
+            Centre for Cognitive Activities (CCA), NIT Durgapur — May 2025 – Present 🚩
           </p>
         </motion.div>
 

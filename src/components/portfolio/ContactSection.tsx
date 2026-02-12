@@ -4,8 +4,8 @@ import { Mail, Phone, MapPin, Linkedin, Github, Send } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
 const contactInfo = [
-  { icon: Mail, label: "Email", value: "anirudh@example.com", href: "mailto:anirudh@example.com", emoji: "📧" },
-  { icon: Phone, label: "Phone", value: "+91 XXX XXX XXXX", href: "tel:+91000000000", emoji: "📞" },
+  { icon: Mail, label: "Email", value: "sharma.aniiirudh@gmail.com", href: "mailto:sharma.aniiirudh@gmail.com", emoji: "📧" },
+  { icon: Phone, label: "Phone", value: "+91 9007190214", href: "tel:+919007190214", emoji: "📞" },
   { icon: MapPin, label: "Location", value: "Kolkata, India", href: "#", emoji: "📍" },
   { icon: Linkedin, label: "LinkedIn", value: "linkedin.com/in/-anirudh-sharma", href: "https://www.linkedin.com/in/-anirudh-sharma/", emoji: "💼" },
   { icon: Github, label: "GitHub", value: "github.com/aniiiii05", href: "https://github.com/aniiiii05", emoji: "🐙" },

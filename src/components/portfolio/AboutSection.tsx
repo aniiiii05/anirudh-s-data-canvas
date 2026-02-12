@@ -7,8 +7,8 @@ const skills = [
   { label: "SQL", emoji: "🗄️" },
   { label: "Power BI", emoji: "📊" },
   { label: "Tableau", emoji: "📈" },
-  { label: "LLMs", emoji: "🧠" },
-  { label: "Gen AI", emoji: "✨" },
+  { label: "Excel VBA", emoji: "📋" },
+  { label: "NLP", emoji: "🧠" },
 ];
 
 const AboutSection = () => {
@@ -18,17 +18,12 @@ const AboutSection = () => {
   return (
     <section id="about" className="py-24 relative" style={{ background: "linear-gradient(180deg, hsl(210 75% 58%), hsl(210 70% 55%))" }}>
       <div className="section-container relative z-10">
-        <motion.div
-          ref={ref}
-          initial={{ opacity: 0, y: 40 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-        >
+        <motion.div ref={ref} initial={{ opacity: 0, y: 40 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6 }}>
           <h2 className="font-heading text-lg sm:text-xl font-bold mb-4 text-center text-foreground drop-shadow-[2px_2px_0_hsl(25,60%,20%)]">
             About <span className="text-accent">Me</span>
           </h2>
           <p className="text-muted-foreground text-center mb-16 max-w-2xl mx-auto text-lg" style={{ fontFamily: "'VT323', monospace" }}>
-            Turning raw data into actionable insights and building AI-powered solutions
+            Data-focused engineering graduate turning ambiguous requirements into actionable analytics
           </p>
         </motion.div>
 
@@ -72,21 +67,18 @@ const AboutSection = () => {
           >
             <div className="glass-card p-6">
               <p className="text-foreground leading-relaxed text-lg" style={{ fontFamily: "'VT323', monospace" }}>
-                I'm a <strong className="text-accent">Data Specialist & AI Enthusiast</strong> with
-                3+ years of experience transforming complex datasets into strategic business insights.
-                My work spans data analysis, business intelligence, and cutting-edge AI applications.
+                I'm a <strong className="text-accent">Data Specialist & Data Analyst</strong> — a data-focused engineering graduate with internship experience in analytics, BI, and operations support. Skilled in Python, SQL, and Power BI with hands-on exposure to ETL automation, dashboarding, and data validation.
               </p>
               <p className="text-muted-foreground leading-relaxed mt-3 text-lg" style={{ fontFamily: "'VT323', monospace" }}>
-                Currently exploring the intersection of <strong className="text-primary">Generative AI</strong> and
-                data analytics — building tools that leverage LLMs, NLP, and prompt engineering.
+                Proven ability to translate ambiguous requirements into actionable analytics, delivering measurable operational improvements across <strong className="text-primary">production pipelines handling 2M+ daily records</strong>.
               </p>
               <p className="text-muted-foreground leading-relaxed mt-3 text-lg" style={{ fontFamily: "'VT323', monospace" }}>
-                Based in <strong className="text-secondary">Kolkata, India</strong> 🇮🇳, working remotely as a Data Specialist.
+                <strong className="text-secondary">B.Tech, Mechanical Engineering</strong> from NIT Durgapur (2022–2026) 🇮🇳. Based in <strong className="text-accent">Kolkata, India</strong>.
               </p>
             </div>
 
             <div className="flex flex-wrap gap-3 pt-4">
-              {["🍄 Data Analysis", "⭐ AI/ML", "🐍 Python", "🗄️ SQL", "📊 Power BI", "🧠 LLMs"].map((tag) => (
+              {["🐍 Python", "🗄️ SQL", "📊 Power BI", "📈 Tableau", "📋 Excel VBA", "🧠 NLP", "⚙️ ETL", "📉 ARIMA"].map((tag) => (
                 <span
                   key={tag}
                   className="px-3 py-1 text-sm font-bold bg-accent text-accent-foreground border-2 border-[hsl(35,80%,40%)]"
