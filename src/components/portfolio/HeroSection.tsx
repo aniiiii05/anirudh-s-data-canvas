@@ -1,5 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import { motion } from "framer-motion";
+import anirudhCharacter from "@/assets/anirudh-character.png";
 import { Github, Linkedin, Mail, Download, ChevronDown } from "lucide-react";
 
 const roles = [
@@ -126,6 +127,16 @@ const HeroSection = () => {
       <Cloud top="15%" left="60%" delay={2} size={1.2} />
       <Cloud top="25%" left="30%" delay={4} size={0.6} />
       <Cloud top="8%" left="80%" delay={1} size={1} />
+
+      {/* Character */}
+      <motion.img
+        src={anirudhCharacter}
+        alt="Anirudh pixel character"
+        className="absolute bottom-16 right-[15%] w-28 sm:w-36 lg:w-44 pointer-events-none z-10 drop-shadow-[4px_4px_0_hsl(25,60%,20%)]"
+        style={{ imageRendering: "pixelated" }}
+        animate={{ y: [0, -16, 0] }}
+        transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+      />
 
       {/* Coins */}
       <Coin top="30%" left="15%" delay={0} />
