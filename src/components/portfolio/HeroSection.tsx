@@ -218,6 +218,7 @@ const QuestionBlock = ({ top, left, delay }: { top: string; left: string; delay:
     if (hit) return;
     setHit(true);
     setShowItem(true);
+    window.dispatchEvent(new CustomEvent("mario-coin"));
     if (itemType === "coin") {
       marioSfx.coin();
     } else {
@@ -346,6 +347,7 @@ const Coin = ({ top, left, delay }: { top: string; left: string; delay: number }
     marioSfx.coin();
     setCollected(true);
     setShowScore(true);
+    window.dispatchEvent(new CustomEvent("mario-coin"));
     setTimeout(() => setShowScore(false), 1000);
     setTimeout(() => setCollected(false), 3000); // respawn after 3s
   };
