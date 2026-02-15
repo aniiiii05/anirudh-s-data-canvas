@@ -1,6 +1,7 @@
 import { motion, useInView } from "framer-motion";
 import { useMemo } from "react";
 import { useRef } from "react";
+import Enemy from "./Enemy";
 
 const skillCategories = [
   {
@@ -78,6 +79,8 @@ const SkillsSection = () => {
           transition={{ duration: 1.5 + Math.random() * 2, delay: s.delay, repeat: Infinity }}
         />
       ))}
+      <Enemy type="koopa" x="10%" bottom="6%" walkRange={90} delay={1} />
+      <Enemy type="goomba" x="80%" bottom="6%" walkRange={50} delay={0} direction="left" />
       <div className="section-container relative z-10">
         <motion.div ref={ref} initial={{ opacity: 0, y: 40 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6 }}>
           <h2 className="font-heading text-lg sm:text-xl font-bold mb-4 text-center text-foreground drop-shadow-[2px_2px_0_hsl(25,60%,20%)]">

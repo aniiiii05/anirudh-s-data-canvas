@@ -1,6 +1,7 @@
 import { motion, useInView, AnimatePresence } from "framer-motion";
 import { useRef, useState, useMemo } from "react";
 import { X, ExternalLink } from "lucide-react";
+import Enemy from "./Enemy";
 
 type Project = {
   title: string;
@@ -147,6 +148,8 @@ const ProjectsSection = () => {
           transition={{ duration: 1.5 + Math.random() * 2, delay: s.delay, repeat: Infinity }}
         />
       ))}
+      <Enemy type="bob-omb" x="6%" bottom="5%" walkRange={60} delay={0.5} />
+      <Enemy type="koopa" x="88%" bottom="5%" walkRange={50} delay={1.5} direction="left" />
       <div className="section-container relative z-10">
         <motion.div ref={ref} initial={{ opacity: 0, y: 40 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6 }}>
           <h2 className="font-heading text-lg sm:text-xl font-bold mb-4 text-center text-foreground drop-shadow-[2px_2px_0_hsl(25,60%,20%)]">

@@ -2,6 +2,7 @@ import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import anirudhPhoto2 from "@/assets/anirudh-photo-2.png";
 import anirudhPhoto3 from "@/assets/anirudh-photo-3.png";
+import Enemy from "./Enemy";
 
 const skills = [
   { label: "Python", emoji: "🐍" },
@@ -18,6 +19,8 @@ const AboutSection = () => {
 
   return (
     <section id="about" className="py-24 relative" style={{ background: "linear-gradient(180deg, hsl(220 20% 12%), hsl(220 15% 8%))" }}>
+      <Enemy type="goomba" x="5%" bottom="10%" walkRange={80} delay={1} />
+      <Enemy type="goomba" x="85%" bottom="10%" walkRange={60} delay={2} direction="left" />
       <div className="section-container relative z-10">
         <motion.div ref={ref} initial={{ opacity: 0, y: 40 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6 }}>
           <h2 className="font-heading text-lg sm:text-xl font-bold mb-4 text-center text-foreground drop-shadow-[2px_2px_0_hsl(25,60%,20%)]">
