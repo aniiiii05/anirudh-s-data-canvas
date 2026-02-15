@@ -73,7 +73,7 @@ const GameHUD = () => {
         }}
       >
         <div className="text-center">
-          <div className="text-[0.45rem] sm:text-[0.55rem] opacity-80">MARIO</div>
+          <div className="text-[0.45rem] sm:text-[0.55rem] opacity-80">ANIRUDH</div>
           <div className="text-[0.5rem] sm:text-[0.6rem]">{String(score).padStart(7, "0")}</div>
         </div>
         <div className="text-center flex items-center gap-1">
