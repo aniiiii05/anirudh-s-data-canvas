@@ -53,7 +53,7 @@ const AchievementsSection = () => {
   const inView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section id="achievements" className="py-24 ground-section">
+    <section id="achievements" className="py-24" style={{ background: "linear-gradient(180deg, hsl(220 20% 10%), hsl(220 15% 6%))" }}>
       <div className="section-container">
         <motion.div ref={ref} initial={{ opacity: 0, y: 40 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6 }}>
           <h2 className="font-heading text-lg sm:text-xl font-bold mb-4 text-center text-foreground drop-shadow-[2px_2px_0_hsl(25,60%,20%)]">

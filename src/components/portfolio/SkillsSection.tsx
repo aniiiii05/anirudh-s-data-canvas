@@ -1,4 +1,5 @@
 import { motion, useInView } from "framer-motion";
+import { useMemo } from "react";
 import { useRef } from "react";
 
 const skillCategories = [
@@ -57,8 +58,26 @@ const SkillsSection = () => {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-100px" });
 
+  const stars = useMemo(() => Array.from({ length: 30 }).map((_, i) => ({
+    x: `${Math.random() * 100}%`,
+    y: `${Math.random() * 100}%`,
+    size: Math.random() > 0.7 ? 3 : 2,
+    delay: Math.random() * 3,
+    color: [45, 200, 0, 120, 280][i % 5],
+  })), []);
+
   return (
-    <section id="skills" className="py-24 relative" style={{ background: "linear-gradient(180deg, hsl(210 75% 58%), hsl(210 70% 52%))" }}>
+    <section id="skills" className="py-24 relative" style={{ background: "linear-gradient(180deg, hsl(230 50% 15%), hsl(230 45% 10%))" }}>
+      {/* Ambient stars */}
+      {stars.map((s, i) => (
+        <motion.div
+          key={i}
+          className="absolute rounded-full pointer-events-none"
+          style={{ width: s.size, height: s.size, background: `hsl(${s.color} 80% 70%)`, top: s.y, left: s.x }}
+          animate={{ opacity: [0.2, 1, 0.2] }}
+          transition={{ duration: 1.5 + Math.random() * 2, delay: s.delay, repeat: Infinity }}
+        />
+      ))}
       <div className="section-container relative z-10">
         <motion.div ref={ref} initial={{ opacity: 0, y: 40 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6 }}>
           <h2 className="font-heading text-lg sm:text-xl font-bold mb-4 text-center text-foreground drop-shadow-[2px_2px_0_hsl(25,60%,20%)]">
