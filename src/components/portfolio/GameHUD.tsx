@@ -96,7 +96,7 @@ const GameHUD = () => {
         </div>
       </div>
       {/* Scroll progress bar */}
-      <div className="w-full h-1" style={{ background: "hsla(0 0% 100% / 0.15)" }}>
+      <div className="w-full h-3 relative" style={{ background: "hsla(0 0% 100% / 0.15)" }}>
         <motion.div
           className="h-full"
           style={{
@@ -105,6 +105,18 @@ const GameHUD = () => {
           }}
           transition={{ duration: 0.1 }}
         />
+        <div
+          className="absolute top-1/2 -translate-y-1/2"
+          style={{
+            left: `${scrollProgress}%`,
+            transform: `translateX(-50%) translateY(-50%)`,
+            fontSize: "0.75rem",
+            lineHeight: 1,
+            filter: "drop-shadow(0 0 2px hsla(0 0% 0% / 0.8))",
+          }}
+        >
+          🏃
+        </div>
       </div>
     </motion.div>
   );
