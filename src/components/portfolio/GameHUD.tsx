@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 
 const GameHUD = () => {
@@ -6,6 +6,7 @@ const GameHUD = () => {
   const [coins, setCoins] = useState(0);
   const [currentWorld, setCurrentWorld] = useState("1-1");
   const [time, setTime] = useState(999);
+  const [scrollProgress, setScrollProgress] = useState(0);
 
   const worldMap: Record<string, string> = {
     "": "1-1",
@@ -27,9 +28,14 @@ const GameHUD = () => {
     return () => window.removeEventListener("mario-coin", handleCoin);
   }, []);
 
-  // Track current section/world
+  // Track current section/world + scroll progress
   useEffect(() => {
     const onScroll = () => {
+      // Progress
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      setScrollProgress(docHeight > 0 ? Math.min((window.scrollY / docHeight) * 100, 100) : 0);
+
+      // World tracking
       const sections = Object.keys(worldMap);
       for (const id of [...sections].reverse()) {
         if (id === "") {
@@ -88,6 +94,17 @@ const GameHUD = () => {
           <div className="text-[0.45rem] sm:text-[0.55rem] opacity-80">TIME</div>
           <div className="text-[0.5rem] sm:text-[0.6rem]">{time}</div>
         </div>
+      </div>
+      {/* Scroll progress bar */}
+      <div className="w-full h-1" style={{ background: "hsla(0 0% 100% / 0.15)" }}>
+        <motion.div
+          className="h-full"
+          style={{
+            width: `${scrollProgress}%`,
+            background: "linear-gradient(90deg, hsl(120 100% 40%), hsl(45 100% 50%), hsl(0 100% 50%))",
+          }}
+          transition={{ duration: 0.1 }}
+        />
       </div>
     </motion.div>
   );
